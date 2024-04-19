@@ -1,21 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-x = np.linspace(0, 10, 1000)
-y = x ** np.sin(x)
+U, I = np.genfromtxt("data/Leak_current/leakage_current.txt", unpack = True)
 
-plt.subplot(1, 2, 1)
-plt.plot(x, y, label='Kurve')
-plt.xlabel(r'$\alpha \mathbin{/} \unit{\ohm}$')
-plt.ylabel(r'$y \mathbin{/} \unit{\micro\joule}$')
+plt.scatter(U, I, label='Leakage current', marker = "x")
+plt.vlines(x = 60, ymin= 0.75, ymax=1.9, linestyles="dashed", colors="black", label = "Depletion voltage")
+plt.xlabel(r'$U \mathbin{/} \unit{\volt}$')
+plt.ylabel(r'$I \mathbin{/} \unit{\micro\ampere}$')
+plt.grid()
 plt.legend(loc='best')
-
-plt.subplot(1, 2, 2)
-plt.plot(x, y, label='Kurve')
-plt.xlabel(r'$\alpha \mathbin{/} \unit{\ohm}$')
-plt.ylabel(r'$y \mathbin{/} \unit{\micro\joule}$')
-plt.legend(loc='best')
-
-# in matplotlibrc leider (noch) nicht möglich
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-plt.savefig('build/plot.pdf')
+plt.savefig('build/leakage.pdf')
+
+ped = np.genfromtxt("data/Pedestal/Pedestal.txt", unpack = True, delimiter=";", dtype=float)
