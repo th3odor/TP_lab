@@ -34,13 +34,15 @@ plugging them into \eqref{eq:noise}. A bar diagram of the pedestals and noise is
   \centering
     \begin{subfigure}{0.45\textwidth}
       \includegraphics[width=\textwidth]{build/pedestal.pdf}
+      \caption{}
       \label{fig:pedestals}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
       \includegraphics[width=\textwidth]{build/noise.pdf}
+      \caption{}
       \label{fig:noise}
     \end{subfigure} 
-  \caption{Bar diagrams of the pedestals and noise of the 128 individual strips.}
+  \caption{Bar diagrams of the pedestals (a) and noise (b) of the 128 individual strips.}
   \label{fig:pedestal_run}
 \end{figure}
 
@@ -60,73 +62,151 @@ distribution around $0$.
 
 \subsection{Calibration measurements}
 
-
+Next, the data aquired from the calibration run is analysed. The results from the delay measurement
+are shown in \autoref{fig:delay}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/delay.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.6\textwidth]{build/delay.pdf}
+  \caption{Results from the delay measurement.}
   \label{fig:delay}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[height=5cm]{build/calib.pdf}
-  \caption{TODO.}
-  \label{fig:calib}
-\end{figure}
+\autoref{fig:delay} shows the ADC counts depending on the delay of the laser. The highest
+counts were archieved at $\qty{64}{\nano\second}$, which is why this value was set as the
+laser delay for the rest of the experiment.
+After this, a calibration curve is measured for five different channels. This curve gives
+the relation between the injected charge and the ADC counts. The five curves are given
+in \autoref{fig:calib}. Additionally for channel $60$, a curve at $\qty{0}{\volt}$ is
+recorded, it can be seen in \autoref{fig:calib_0V}, where it is compared to the regular
+curve of channel $60$.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/calib_0V.pdf}
-  \caption{TODO.}
-  \label{fig:calib_0V}
+    \begin{subfigure}{0.45\textwidth}
+      \includegraphics[width=\textwidth]{build/calib.pdf}
+      \caption{}
+      \label{fig:calib}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+      \includegraphics[width=\textwidth]{build/calib_0V.pdf}
+      \caption{}
+      \label{fig:calib_0V}
+    \end{subfigure} 
+  \caption{Calibration curve of five channels (a) and detailed view of channel $60$ at $\qty{0}{\volt}$ (b).}
+  \label{fig:calib_run}
 \end{figure}
+
+As seen in \autoref{fig:calib}, all channels show almost exactly the same calibration curve.
+For some unknown reason, channel $20$ meausured significantly less ADC counts.
+For the next step, the mean value of the five channels is taken. The calibration curve at
+$\qty{0}{\volt}$ is very similar to the one measured above the depletion voltage. This
+leads to the conclusion that the relation between the ADC counts and the injected charge does not
+depend on the applied bias voltage.
+To further quantify this dependecy of the counts and the injected charge, a 4-th degree
+polynomial is fit to the mean counts of the five channels. The polynomial is of the from
+\begin{equation}
+  Q(\text{ADC}) = a\cdot\text{ADC}^4 + b\cdot\text{ADC}^3 + c\cdot\text{ADC}^2 + d\cdot\text{ADC} + e \, .
+  \label{eq:polynomial}
+\end{equation}
+The fit is performed using the \textit{curvefit} method from the \textit{scipy} \cite{scipy}
+package. The result is shown in \autoref{fig:calib_fit}, the fit range is restricted to the range
+below $250$ ADC counts to get a good result.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/calib_fit.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.6\textwidth]{build/calib_fit.pdf}
+  \caption{Fit of 4-th degree polynomial to the mean ADC counts of the calibration run.}
   \label{fig:calib_fit}
 \end{figure}
 
+The fit yields the following coefficients for \eqref{eq:polynomial}
+\begin{align*}
+  a &= \qty{0.000111+-0.000006}{\elementarycharge} \\
+  b &= \qty{-0.0439+-0.0032}{\elementarycharge} \\
+  c &= \qty{6.2+-0.6}{\elementarycharge} \\
+  d &= \qty{30+-40}{\elementarycharge} \\
+  e &= \qty{2600+-700}{\elementarycharge} \, .
+\end{align*}
+These coefficients together with \eqref{eq:polynomial} now allow any ADC counts
+to be converted into an electric charge.
+
 \subsection{Measuring the strip sensor by using the laser}
+
+The physical structure of the sensor and its strips is determined by using the laser.
+Before the measurement can be started, the optimal delay between laser signal and chip readout
+is determined by plotting the data from the \textit{Laser Sync} run. This is shown in
+\autoref{fig:laser_delay}, where it is cleary visible that the maxiaml ADC counts are archieved at a
+delay of $\qty{100}{\nano\second}$.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/laser_delay.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.6\textwidth]{build/laser_delay.pdf}
+  \caption{Results of the \textit{Laser Sync} run.}
   \label{fig:laser_delay}
 \end{figure}
 
+After moving the laser across the $\qty{35}{\micro\meter}$ intervall, a heatmap is produced
+showing the signal of the relevant channels that were hit by the laser. 
+\autoref{fig:laser_scan} shows the affected channels 82-85 and their signal strength depending
+on the laser position.
+
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/laser_scan.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.7\textwidth]{build/laser_scan.pdf}
+  \caption{Heatmap of the signal strength of the affected channels depending on the laser position.}
   \label{fig:laser_scan}
 \end{figure}
 
+In the following, the individual signal for channel 83 is analysed in \autoref{fig:channel_83}.
+The position of the beginning, peak and end of the signal is also shown.
+
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/channel_83.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.6\textwidth]{build/channel_83.pdf}
+  \caption{Signal strength of channel 83 depending on the laser position.}
   \label{fig:channel_83}
 \end{figure}
 
+The width of the strip is simply the distance between the two peaks, as this is the position where the laser
+is on the channel but reflected by the metal of the strip. The extension of the laser can be estimated by
+the distance between the start of a peak and its maximum. All relevant positions are marked in
+\autoref{fig:channel_83} and the resulting values are
+\begin{align*}
+  \text{width of strips} &= \qty{290}{\micro\meter} - \qty{170}{\micro\meter} = \qty{120}{\micro\meter} \\
+  \text{laser extension} &= \qty{170}{\micro\meter} - \qty{120}{\micro\meter} = \qty{50}{\micro\meter} \, .
+\end{align*}
+The distance of two strips can be determined by comparing the position of the maxima of two different channels
+in \autoref{fig:laser_scan}
+\begin{align*}
+  \text{distance} &= \qty{40}{\micro\meter} \, .
+\end{align*}
+The pitch is then calculated as the sum of the distance between the strips and their width
+\begin{align*}
+  \text{pitch} &= \qty{120}{\micro\meter} + \qty{40}{\micro\meter} = \qty{160}{\micro\meter} \, .
+\end{align*}
+
 \subsection{Determination of the charge collection efficiency}
+
+The charge collection efficiency of the laser is determined by measuring the relation between the
+collected charge (ADC counts) and the applied bias voltage.
 
 \subsubsection{Using the laser}
 
+WHen using the laser, at first the channel on which the laser is focused during the measurement is to
+be determined. By plotting a heatmap of the ADC counts for each channel, \autoref{fig:CCEL_channel}
+cleary shows that the laser was focused on channel $73$.
+
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/CCEL_channel.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.7\textwidth]{build/CCEL_channel.pdf}
+  \caption{Heatmap showing the ADC counts of each channel and bias voltage.}
   \label{fig:CCEL_channel}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/CCEL.pdf}
+  \includegraphics[width=0.6\textwidth]{build/CCEL.pdf}
   \caption{TODO.}
   \label{fig:CCEL}
 \end{figure}
@@ -135,7 +215,7 @@ distribution around $0$.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/CCEQ.pdf}
+  \includegraphics[width=0.6\textwidth]{build/CCEQ.pdf}
   \caption{TODO.}
   \label{fig:CCEQ}
 \end{figure}
@@ -156,7 +236,7 @@ distribution around $0$.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/hitmap.pdf}
+  \includegraphics[width=0.6\textwidth]{build/hitmap.pdf}
   \caption{TODO.}
   \label{fig:hitmap}
 \end{figure}
