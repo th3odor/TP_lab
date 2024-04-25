@@ -43,7 +43,7 @@ plt.savefig('build/noise.pdf')
 plt.close()
 
 plt.hist(common_mode, bins=20, density=True)
-plt.xlabel(r'Common Mode Shift')
+plt.xlabel(r'Common Mode Shift / ADC counts')
 plt.ylabel(r'Probability')
 plt.savefig('build/common_mode.pdf')
 plt.close()

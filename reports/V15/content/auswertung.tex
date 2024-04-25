@@ -1,33 +1,66 @@
 \section{Analysis}
 \label{sec:Analysis}
 
+As a first step all of the aquired \textit{.h5} data is converted into \textit{.txt} files with
+the help of the provided \textit{execute.py} script.
+
 \subsection{Depletion voltage}
+
+The first part of the analysis is the measurement of the current-voltage characteristic of the
+silicon strip sensor. In \autoref{fig:leakage}, the measured leakuge current is displayed with
+the corresponding applied bias voltage. A flattening of the curve at $\qty{60}{\volt}$ is cleary
+visible, this corresponds exactly to the depletion voltage $U_{\text{dep}}=\qty{60}{\volt}$ of
+the chip stated by the manufacturer. For the following measurements, the bias voltage is
+set to $\qty{80}{\volt}$ to ensure the chip is always fully depleted.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=5cm]{build/leakage.pdf}
-  \caption{Measured leakage current plottet against the applied bias voltage.}
+  \includegraphics[width=0.6\textwidth]{build/leakage.pdf}
+  \caption{Plot of the measured current-voltage characteristic.}
   \label{fig:leakage}
 \end{figure}
 
 \subsection{Pedestal run}
 
+Next, the pedestal run is evaluated to determine the noise of the strips. The pedestal
+for each strip is calculated by taking the mean value of the ADC counts of all events for each individual strip,
+as given by \eqref{eq:pedestal}. The common mode shift for each event is then aquired by substracting
+the pedestal from the ADC counts of each strip and again taking the mean value according to
+\eqref{eq:common_mode}. At last, the noise is determined using the previous results by
+plugging them into \eqref{eq:noise}. A bar diagram of the pedestals and noise is shown in
+\autoref{fig:pedestal_run}.
+
 \begin{figure}[H]
   \centering
-    \begin{subfigure}{0.5\textwidth}
+    \begin{subfigure}{0.45\textwidth}
       \includegraphics[width=\textwidth]{build/pedestal.pdf}
+      \label{fig:pedestals}
     \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
+    \begin{subfigure}{0.45\textwidth}
       \includegraphics[width=\textwidth]{build/noise.pdf}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-      \includegraphics[width=\textwidth]{build/common_mode.pdf}
-    \end{subfigure}
-  \caption{TODO.}
+      \label{fig:noise}
+    \end{subfigure} 
+  \caption{Bar diagrams of the pedestals and noise of the 128 individual strips.}
   \label{fig:pedestal_run}
 \end{figure}
 
+The diagrams show a visible increase of the pedestals and noise towards the edges of the chip,
+this might have something to with the structure of the chip or the way the signal is read out.
+A histogram of the common mode shift is displayed in \autoref{fig:mode_shift}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{build/common_mode.pdf}
+  \caption{Commong mode shift measured during the pedestal run.}
+  \label{fig:mode_shift}
+\end{figure}
+
+As expected, the common mode shift also referred to as \textit{common noise} follows a gaussian
+distribution around $0$.
+
 \subsection{Calibration measurements}
+
+
 
 \begin{figure}[H]
   \centering
