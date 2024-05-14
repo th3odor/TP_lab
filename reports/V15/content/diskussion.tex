@@ -5,43 +5,43 @@
 
 In the first part, the depletion voltage is determined to be $\qty{60}{\volt}$.
 Later, the depletion voltage is again measured by using the charge collection efficiency.
-In this case, a value of $\qty{80}{\volt}$ is obtained. The manufacturer \cite{V15} states a deplition
+In this case, a value of $\qty{80}{\volt}$ is obtained. The manufacturer \cite{V15} states a depletion
 voltage in the range of $\qty{60}{}$ to $\qty{80}{\volt}$, so both measurements are
 acceptable. Both values are only estimations, as they are obtained by roughly determining the
-point where a curve flattens into a plateau. Therefore it is not unexpected that they dont fully agree.
+point where a curve flattens into a plateau. Therefore it is expected that they do not fully agree.
 
 \subsection{Measuring the strip sensors}
 
 The pitch of the strip sensors has been calculated from their measured width and distance to be
 $\qty{160}{\micro\meter}$. This is the exact value given by the manufacturer \cite{V15}, the high
-precision could be archieved through the $\qty{10}{\micro\meter}$ resolution chosen for the scan.
-The lasers extension was measured at $\qty{50}{\micro\meter}$ and is thus significantly larger
-than the stated \cite{V15} $\qty{20}{\micro\meter}$. This indicates that the laser probably was not
-fully focused during the measurement, which is to be excpected as it prooved difficult to find an
+precision could be achieved through the $\qty{10}{\micro\meter}$ resolution chosen for the scan.
+The laser extension was measured at $\qty{50}{\micro\meter}$ and is thus significantly larger
+than the stated \cite{V15} $\qty{20}{\micro\meter}$. This indicates that the laser was probably not
+fully focused during the measurement. A reason for this could be the fact that it was difficult to find an
 absolout maxima when adjusting the horizontal micrometer scew.
 
 The charge collection efficiency curve shows a behaviour close to the theoretical one, with the
 exception that the plateau slighty increases for voltages above the depletion voltage. This might be
-a consequence of noise that increases with the bias voltage and is not fully removed from the data.
+a consequence of the noise, that increases with the bias voltage and is not fully removed from the data.
 
-The value for the penetration depth $ a= \qty{253+-6}{\micro\meter}$ seems consistent with the sensor
+The value for the penetration depth $ a= \qty{253+-30}{\micro\meter}$ seems consistent with the sensor
 thickness of $D = \qty{300}{\micro\meter}$ and the given pentration depths of lasers with slightly different
 wavelenghts in \cite{V15}.
 
 \subsection{Energy spectrum}
 
 During the large source scan, the calculated energy spectrum resembles the expected convolution of a
-Landau and Gauss distribution \cite{V15}, where the most probable energy is lower than the mean energy.
+Landau and a Gauss distribution \cite{V15}, where the most probable energy is lower than the mean energy.
 Using the modified Bethe-Bloch equation, it can be calculated that the average energy disposition 
-of an ionising electron of the maximum energy of the primary decay of $^{90}\text{Sr}$ in pure silicon is
+of an ionising electron with the maximum energy of the primary $^{90}\text{Sr}$ decay in pure silicon is
 $\qty{3.88}{\mega\electronvolt\per\centi\meter}$.
-Multiplying this by the sensor thickness $D$, the theoretically expected mean energy loss becomes
-$\bar{E}_{\text{theo}} = \qty{116.4}{\kilo\electronvolt}$. This can be compared this to the measured
+Multiplying this value by the sensor thickness $D$, the theoretically expected mean energy loss becomes
+$\bar{E}_{\text{theo}} = \qty{116.4}{\kilo\electronvolt}$. This can be compared to the measured
 mean energy loss
 \begin{align*}
     \bar{E}_{\text{theo}} &= \qty{116.4}{\kilo\electronvolt} \\
-    \bar{E}_{\text{exp}} &= \qty{163}{\kilo\electronvolt}\, .
+    \bar{E}_{\text{exp}} &= \qty{146.5+-0.6}{\kilo\electronvolt}\, .
 \end{align*}
-A deviation of $\qty{28.6}{\percent}$ is observed, which is quite large. A possible reason might be an underestimation
-of the noise in the sensor, also the modified Bethe-Bloch equation is only an approximation with limited
+A deviation of $\qty{20.5}{\percent}$ is observed, which is quite large. A possible reason might be an underestimation
+of the noise in the sensor, furthermore the modified Bethe-Bloch equation is only an approximation with limited
 precision.

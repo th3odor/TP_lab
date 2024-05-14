@@ -1,13 +1,14 @@
 \section{Analysis}
 \label{sec:Analysis}
 
-As a first step all of the aquired \textit{.h5} data is converted into \textit{.txt} files with
-the help of the provided \textit{execute.py} script.
+%As a first step, all of the aquired \textit{.h5} data is converted into \textit{.txt} files with
+%the help of the provided \textit{execute.py} script.
+The following analysis is split into five parts, each focusing on one of the measurements decribed in \autoref{sec:exec}.
 
 \subsection{Depletion voltage}
 
 The first part of the analysis is the measurement of the current-voltage characteristic of the
-silicon strip sensor. In \autoref{fig:leakage}, the measured leakuge current is displayed with
+silicon strip sensor. In \autoref{fig:leakage}, the measured leakage current is displayed with
 the corresponding applied bias voltage. A flattening of the curve at $\qty{60}{\volt}$ is cleary
 visible, this corresponds exactly to the depletion voltage $U_{\text{dep}}=\qty{60}{\volt}$ of
 the chip stated by the manufacturer. For the following measurements, the bias voltage is
@@ -22,13 +23,12 @@ set to $\qty{80}{\volt}$ to ensure the chip is always fully depleted.
 
 \subsection{Pedestal run}
 
-Next, the pedestal run is evaluated to determine the noise of the strips. The pedestal
+The data collected during the pedestal run is evaluated to determine the noise of the strips. The pedestal
 for each strip is calculated by taking the mean value of the ADC counts of all events for each individual strip,
 as given by \eqref{eq:pedestal}. The common mode shift for each event is then aquired by substracting
 the pedestal from the ADC counts of each strip and again taking the mean value according to
-\eqref{eq:common_mode}. At last, the noise is determined using the previous results by
-plugging them into \eqref{eq:noise}. A bar diagram of the pedestals and noise is shown in
-\autoref{fig:pedestal_run}.
+\eqref{eq:common_mode}. At last, the noise is determined by plugging the previous results into \eqref{eq:noise}.
+A bar diagram of the pedestals and noise is shown in \autoref{fig:pedestal_run}.
 
 \begin{figure}[H]
   \centering
@@ -58,11 +58,11 @@ A histogram of the common mode shift is displayed in \autoref{fig:mode_shift}.
 \end{figure}
 
 As expected, the common mode shift also referred to as \textit{common noise} follows a gaussian
-distribution around $0$.
+distribution centered around $0$.
 
 \subsection{Calibration measurements}
 
-Next, the data aquired from the calibration run is analysed. The results from the delay measurement
+In this section, the data aquired from the calibration run is analysed. The results from the delay measurement
 are shown in \autoref{fig:delay}.
 
 \begin{figure}[H]
@@ -75,11 +75,11 @@ are shown in \autoref{fig:delay}.
 \autoref{fig:delay} shows the ADC counts depending on the delay of the laser. The highest
 counts were archieved at $\qty{64}{\nano\second}$, which is why this value was set as the
 laser delay for the rest of the experiment.
-After this, a calibration curve is measured for five different channels. This curve gives
+After this, a calibration curve is measured for five different channels. This curve shows
 the relation between the injected charge and the ADC counts. The five curves are given
-in \autoref{fig:calib}. Additionally for channel $60$, a curve at $\qty{0}{\volt}$ is
-recorded, it can be seen in \autoref{fig:calib_0V}, where it is compared to the regular
-curve of channel $60$.
+in \autoref{fig:calib}.
+As one can see in \autoref{fig:calib_0V}, an additional curve at $\qty{0}{\volt}$ is recorded for channel $60$
+and compared to the regular curve of this channel.
 
 \begin{figure}[H]
   \centering
@@ -99,18 +99,19 @@ curve of channel $60$.
 
 As seen in \autoref{fig:calib}, all channels show almost exactly the same calibration curve.
 For some unknown reason, channel $20$ meausured significantly less ADC counts.
+This is why it is excluded from the determination of the average value of all channels.
 For the next step, the mean value of the five channels is taken. The calibration curve at
-$\qty{0}{\volt}$ is very similar to the one measured above the depletion voltage. This
-leads to the conclusion that the relation between the ADC counts and the injected charge does not
-depend on the applied bias voltage.
-To further quantify this dependecy of the counts and the injected charge, a 4-th degree
-polynomial is fit to the mean counts of the five channels. The polynomial is of the from
+$\qty{0}{\volt}$ is slightly lower than the one measured above the depletion voltage. This
+behaviour is expected, as the depletion region is smaller if no bias voltage is applied.
+This directly leads to fewer charges being registered and thus lower ADC counts, as it can be seen in \autoref{fig:calib_0V}.
+To further quantify this dependecy of the counts from the injected charge, a 4-th degree
+polynomial is fitted to the mean counts of the five channels. The polynomial is of the form
 \begin{equation}
   Q(\text{ADC}) = a\cdot\text{ADC}^4 + b\cdot\text{ADC}^3 + c\cdot\text{ADC}^2 + d\cdot\text{ADC} + e \, .
   \label{eq:polynomial}
 \end{equation}
-The fit is performed using the \textit{curvefit} method from the \textit{scipy} \cite{scipy}
-package. The result is shown in \autoref{fig:calib_fit}, the fit range is restricted to the range
+%The fit is performed using the \textit{curvefit} method from the \textit{scipy} \cite{scipy} package.
+The result of the fit is shown in \autoref{fig:calib_fit}. Here, the fit range is restricted to values
 below $250$ ADC counts to get a good result.
 
 \begin{figure}[H]
@@ -122,21 +123,22 @@ below $250$ ADC counts to get a good result.
 
 The fit yields the following coefficients for \eqref{eq:polynomial}
 \begin{align*}
-  a &= \qty{0.000111+-0.000006}{\elementarycharge} \\
-  b &= \qty{-0.0439+-0.0032}{\elementarycharge} \\
-  c &= \qty{6.2+-0.6}{\elementarycharge} \\
-  d &= \qty{30+-40}{\elementarycharge} \\
-  e &= \qty{2600+-700}{\elementarycharge} \, .
+  a &= \qty{7.7(0.4)e-5}{\elementarycharge} \\
+  b &= \qty{-2.93(0.21)e-2}{\elementarycharge} \\
+  c &= \qty{4.1+-0.4}{\elementarycharge} \\
+  d &= \qty{115+-24}{\elementarycharge} \\
+  e &= \qty{1.6(0.5)e+3}{\elementarycharge} \, .
 \end{align*}
 These coefficients together with \eqref{eq:polynomial} now allow any ADC counts
 to be converted into an electric charge.
+
 
 \subsection{Measuring the strip sensor by using the laser}
 
 The physical structure of the sensor and its strips is determined by using the laser.
 Before the measurement can be started, the optimal delay between laser signal and chip readout
 is determined by plotting the data from the \textit{Laser Sync} run. This is shown in
-\autoref{fig:laser_delay}, where it is cleary visible that the maxiaml ADC counts are archieved at a
+\autoref{fig:laser_delay}, where it is cleary visible that the maximal ADC counts are archieved at a
 delay of $\qty{100}{\nano\second}$.
 
 \begin{figure}[H]
@@ -146,9 +148,9 @@ delay of $\qty{100}{\nano\second}$.
   \label{fig:laser_delay}
 \end{figure}
 
-After moving the laser across the $\qty{35}{\micro\meter}$ intervall, a heatmap is produced
+After moving the laser across the $\qty{35}{\micro\meter}$ intervals, a heatmap is produced
 showing the signal of the relevant channels that were hit by the laser. 
-\autoref{fig:laser_scan} shows the affected channels 82-85 and their signal strength depending
+\autoref{fig:laser_scan} shows the affected channels (82-85) and their signal strength depending
 on the laser position.
 
 \begin{figure}[H]
@@ -194,8 +196,8 @@ collected charge (ADC counts) and the applied bias voltage.
 \subsubsection{Using the laser}
 
 When using the laser, at first the channel on which the laser is focused during the measurement is to
-be determined. By plotting a heatmap of the ADC counts for each channel, \autoref{fig:CCEL_channel}
-cleary shows that the laser was focused on channel $73$.
+be determined. By plotting a heatmap of the ADC counts for each channel, one can see
+that the laser was focused on channel $73$, as shown in \autoref{fig:CCEL_channel}.
 
 \begin{figure}[H]
   \centering
@@ -204,7 +206,7 @@ cleary shows that the laser was focused on channel $73$.
   \label{fig:CCEL_channel}
 \end{figure}
 
-Thus in the following, only the data from channel $73$ is considered. In order to get the
+Thus in the following, only the data from channel $73$ are considered. In order to get the
 charge collection efficiency, the measured ADC counts
 have to be normalized in regard to the maximum ADC counts of the plateau.
 In theory, the plateau should show constant counts after the depletion voltage $U_{\text{dep}}$ is reached,
@@ -225,15 +227,15 @@ The depletion voltage of $U_{\text{dep}} = \qty{80}{\volt}$ is a fixed paramter 
 \eqref{eq:charge_col_eff}, whereas the value of the penetration depth $a$ of the laser is determined
 via the fit as
 \begin{align*}
-  a &= \qty{253+-6}{\micro\meter} \, .
+  a &= \qty{253+-30}{\micro\meter} \, .
 \end{align*}
 
 \subsubsection{Using the beta source}
 
-The same curve is now measured by replacing the laser as a source with a $\beta^-$ source.
+The same curve is now measured by replacing the laser with a $\beta^-$ radioactive source.
 The ADC counts are now determined in clusters. To get the charge collection efficiency,
-the entries in each cluster are summed, after this the mean value of all clusters is taken.
-A normalization is performed analogously to the one of laser measurement.
+the entries in each cluster are first summed, then the mean value of all clusters is taken.
+A normalization is performed analogously to the one of the laser measurement.
 The resulting curve is displayed in \autoref{fig:CCEQ}.
 
 \begin{figure}[H]
@@ -242,6 +244,20 @@ The resulting curve is displayed in \autoref{fig:CCEQ}.
   \caption{Charge collection efficiency determined via the $\beta^-$ source.}
   \label{fig:CCEQ}
 \end{figure}
+
+A comparison of the measured curves with the two different methods is shown in \autoref{fig:CCELvsCCEQ}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{build/CCEL_vs_CCEQ.pdf}
+  \caption{Comparison of the charge collection efficiency determined via the laser and the $\beta^-$ source, respectively.}
+  \label{fig:CCELvsCCEQ}
+\end{figure}
+
+One can see that the curve measured using the laser increases earlier with the applied voltage. After reaching the depletion voltage,
+both curves fully agree again. This shows that the chip performs worse with detecting charged particles at lower voltages compared to
+just the photons emmited by the laser. If measurements are performed above the depletion voltage, this effect can be neglected as both
+methods yield the same charge collection efficiency there.
 
 \subsection{Large source scan}
 
@@ -263,11 +279,11 @@ as well as how many channels exist per cluster.
   \label{fig:RS_histograms}
 \end{figure}
 
+One can see that an event mostly leads to the formation of one cluster,
+and each cluster usually contains the signal of one to three channels.
 Next, a hitmap is produced for all channels. This is displayed in
 \autoref{fig:hitmap} and shows how many events/hits were registered by each
-individual channel. An events mostly leads to the formation of one cluster,
-and each cluster usually contains the signal of one to three channels.
-
+individual channel. 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{build/hitmap.pdf}
@@ -278,12 +294,12 @@ and each cluster usually contains the signal of one to three channels.
 Most of the hits are registered in the middle of the chip, while the
 edges cleary show a lower amount of entries.
 Lastly, the distribution of the measured ADC counts as well as the energy
-spectrum is computed. To aquire the energy spectrum from the ADC counts, the
-counts are converted into an electric pulse with the conversion formula \eqref{eq:polynomial} determined
+spectrum is computed. To aquire the energy spectrum from the ADC counts, they
+are converted into electric pulses with the conversion formula \eqref{eq:polynomial} determined
 during the calibration run. The pulse is then converted into an energy by
 using the fact that the energy needed to generate an electron-hole pair is approximatly
 $\qty{3.6}{\electronvolt}$ \cite{V15}. \autoref{fig:RS_distributions} shows
-both distributions.
+both the aforementioned distributions.
 
 \begin{figure}[H]
   \centering
@@ -299,9 +315,9 @@ both distributions.
   \label{fig:RS_distributions}
 \end{figure}
 
-The distribution of the energ spectrum allows to determine the most probable energy
-and mean energy of the $\beta^-$ source as
+The distribution of the energy spectrum allows to determine the most probable energy
+and mean energy of the $\beta^-$ source:
 \begin{align*}
-  E_{\mathrm{MPV}} &= \qty{97}{\kilo\electronvolt} \\
-  E_{\mathrm{Mean}} &= \qty{163}{\kilo\electronvolt} \, .
+  E_{\mathrm{MPV}} &= \qty{92+-5}{\kilo\electronvolt} \\
+  E_{\mathrm{Mean}} &= \qty{146.5+-0.6}{\kilo\electronvolt} \, .
 \end{align*}

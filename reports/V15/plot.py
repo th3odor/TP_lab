@@ -44,7 +44,7 @@ plt.close()
 
 plt.hist(common_mode, bins=20, density=True)
 plt.xlabel(r'Common Mode Shift / ADC counts')
-plt.ylabel(r'Probability')
+plt.ylabel(r'Counts (normalized)')
 plt.savefig('build/common_mode.pdf')
 plt.close()
 
@@ -69,7 +69,8 @@ charge_80, ADC_80 = np.genfromtxt("data/Calib/charge_80.txt", unpack = True)
 charge_100, ADC_100 = np.genfromtxt("data/Calib/charge_100.txt", unpack = True)
 charge_60_0V, ADC_60_0V = np.genfromtxt("data/Calib/charge_60_0volts.txt", unpack = True)
 
-ADC_mean = (ADC_20+ADC_40+ADC_60+ADC_80+ADC_100)/5
+#ADC_mean = (ADC_20+ADC_40+ADC_60+ADC_80+ADC_100)/5
+ADC_mean = (ADC_40+ADC_60+ADC_80+ADC_100)/4 # channel 20 excluded bad data
 
 plt.scatter(charge_20, ADC_20, label = "Channel 20", marker="x")
 plt.scatter(charge_40, ADC_40, label = "Channel 40", marker="x")
@@ -197,7 +198,8 @@ D = 300*10**-6
 U_dep = 80
 def CCE(U, a):
     return (1 - np.exp(- (D*np.sqrt(U/U_dep)) / a)) / (1 - np.exp(- D / a))
-params_, cov = curve_fit(CCE, np.linspace(0,80,9) ,ccel[0:9,71], bounds=((0),(300*10**-6)))
+params_, cov = curve_fit(CCE, np.linspace(0,80,9) ,ccel[0:9,71], bounds=((0),(300*10**-6))) ##
+errors = np.sqrt(np.diag(cov))
 a = ufloat(params_[0],errors[0])
 #U = ufloat(params[1],errors[1])
 print("Fit parameters for CCE with laser:")
@@ -210,7 +212,7 @@ plt.scatter(U, ccel[:,71], label='Measurement', marker = "x")
 plt.vlines(80, ymin=0, ymax=1.1, label = r"Start of Plateu at $U_{\mathrm{dep}}$", color = "black", linestyle = "dashed")
 plt.plot(np.linspace(0,80,100), CCE(np.linspace(0,80,100), *params_), label = "Fit", color = "red")
 plt.xlabel(r'$U \mathbin{/} \unit{\volt}$')
-plt.ylabel(r'CCE / %')
+plt.ylabel(r'CCE')
 plt.grid()
 plt.legend(loc='best')
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
@@ -241,11 +243,22 @@ plt.plot(U, mean_counts, label='Measurement', marker = "x")
 plt.vlines(80, ymin=0, ymax=1.1, label = r"Start of Plateu at $U_{\mathrm{dep}}$", color = "black", linestyle = "dashed")
 #plt.plot(np.linspace(0,80,100), CCE(np.linspace(0,80,100), *params), label = "Fit", color = "red")
 plt.xlabel(r'$U \mathbin{/} \unit{\volt}$')
-plt.ylabel(r'Mean CCE / %')
+plt.ylabel(r'Mean CCE')
 plt.grid()
 plt.legend(loc='best')
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/CCEQ.pdf')
+plt.close()
+
+plt.plot(U, ccel[:,71], label='Laser', marker = "x")
+plt.plot(U, mean_counts, label='Beta source', marker = "o")
+plt.vlines(80, ymin=0, ymax=1.1, label = r"$U_{\mathrm{dep}}$", color = "black", linestyle = "dashed")
+plt.xlabel(r'$U \mathbin{/} \unit{\volt}$')
+plt.ylabel(r'CCE')
+plt.grid()
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/CCEL_vs_CCEQ.pdf')
 plt.close()
 
 ## 7) Large source scan ##
@@ -292,14 +305,20 @@ plt.close()
 energies = conversion(entries, *params)
 energies = 3.6*energies*10**-3 ##3.6 eV energy for electron/hole pair creation
 cut = energies<400
-plt.hist(energies[cut], bins = 80, histtype="step", label="Measured energy distribution")
-plt.vlines(97, ymin=0, ymax=65*10**3, label = r"$E_{\mathrm{MPV}} = 97.0$ keV", color = "black", linestyle = "dashed")
-plt.vlines(np.mean(energies), ymin=0, ymax=65*10**3, label = r"$E_{\mathrm{mean}}$" + f" = {np.around(np.mean(energies), decimals=0)} keV", color = "red", linestyle = "dashed")
+mean = ufloat(np.mean(energies), np.std(energies/np.sqrt(len(energies))))
+n, bins, _ = plt.hist(energies[cut], bins = range(0, 400, 5), histtype="step", label="Measured energy distribution")
+mpv = ufloat(bins[np.argmax(n)]+2.5, 5)
+plt.vlines(mpv.nominal_value, ymin=0, ymax=7.5*10**4, label = r"$E_{\mathrm{MPV}}$" + f" = {mpv} keV", color = "black", linestyle = "dashed")
+plt.vlines(np.mean(energies), ymin=0, ymax=7.5*10**4, label = r"$E_{\mathrm{mean}}$" + f" = {mean} keV", color = "red", linestyle = "dashed")
 plt.xlim(0,400)
 plt.xlabel(r'Energy / keV')
-plt.ylabel(r'Counts per 20 keV')
+plt.ylabel(r'Counts per 5 keV')
 plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 plt.legend(loc='best')
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/energy.pdf')
 plt.close()
+
+print(f"Most likely energy: {mpv} keV")
+print(f"Mean energy: {mean} keV")
+print("")
