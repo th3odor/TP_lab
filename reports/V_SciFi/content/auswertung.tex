@@ -1,12 +1,94 @@
-\section{Auswertung}
-\label{sec:Auswertung}
+\section{Analysis}
+\label{sec:Analysis}
 
-\begin{figure}
-  \centering
-  \includegraphics{plot.pdf}
-  \caption{Plot.}
-  \label{fig:plot}
+\subsection{Spectrometer Measurement}
+
+Initially the two measurements of the spectra are plotted and shown in \autoref{fig:lightonoff}. 
+These show the effect the light has on a measurement.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{build/LightOnOff}
+	\caption{}
+	\label{fig:lightonoff}
 \end{figure}
 
+To reduce the effect of external light sources, the counts during a measurement with the activated laser are subtracted by the
+so-called dark counts (measurements with the laser deactivated). The new cleaned spectra are shown in \autoref{fig:dcsubtracted}.
 
-Siehe \autoref{fig:plot}!
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{build/DCsubtracted}
+	\caption{}
+	\label{fig:dcsubtracted}
+\end{figure}
+
+\subsection{Radial Symmetry measurement}
+The goal of this part of the analysis is the visualization of the light intensity in relation to the horizontal and vertical measurement angle.
+The intensity is determined as the sum of the counts of a measured spectrum with the dark counts subtracted. 
+Additionally each intensity is normed by dividing each by the highest measured intensity and plotted in a two dimensional histogram shown in \autoref{fig:angles}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{build/angles}
+	\caption{}
+	\label{fig:angles}
+\end{figure}
+
+\subsection{Simulation}
+
+The simulated data is created using the software \texttt{GEANT4} and consist of 1200 Files with 14 features each. These are used to gain a insight into the inner workings of the fiber. 
+\subsubsection{Simulation cleaning}
+Due to errors in the simulation process some of the generated events have to be removed. 
+This includes photons arriving at the photomultiplier outside of the fiber as well as photons that caused Rayleigh scattering. 
+The effect of the wrong generated measurements and the application of a requirement on the calculated \texttt{r\_exit} variable 
+(distance to the core of the fiber) $\mathtt{r\_exit}\leq \qty{0.125}{\milli\meter}$ is shown in \autoref{fig:rcut}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{build/rCut}
+	\caption{}
+	\label{fig:rcut}
+\end{figure}
+
+Additionally the simulation data is split into two samples for core and cladding photons. Where measurements of core photons have a \texttt{length\_clad} = 0 and cladding photons \texttt{length\_clad} $\neq$ 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

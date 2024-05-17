@@ -130,3 +130,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+reports/V_SciFi/v01.aux
+reports/V_SciFi/v01.bbl
+reports/V_SciFi/v01.bcf
+reports/V_SciFi/v01.blg
+reports/V_SciFi/v01.pdf
+reports/V_SciFi/v01.run.xml
+reports/V_SciFi/v01.synctex.gz
+reports/V_SciFi/v01.toc

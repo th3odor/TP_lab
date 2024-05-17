@@ -123,7 +123,7 @@ theta1 = np.arccos(n1/nC)*180/np.pi
 theta2 = np.arccos(n2/nC)*180/np.pi
 print(f'max angles thetha_1 =  {theta1} thetha_2 = {theta2}')
 
-counts, bins, stf = plt.hist(dfM['thetha']*180/np.pi, bins=50, histtype='step', label='Mantle', linewidth=2, range=(0,50))
+counts, bins, stf = plt.hist(dfM['thetha']*180/np.pi, bins=50, histtype='step', label='Cladding', linewidth=2, range=(0,50))
 plt.hist(dfK['thetha']*180/np.pi, bins=bins, histtype='step', linewidth=2,label='Core');
 plt.axvline(x=theta1, label=r'$\theta_1$', linewidth=2, c='tab:red')
 plt.axvline(x=theta2, label=r'$\theta_2$', linewidth=2, c='tab:green')
