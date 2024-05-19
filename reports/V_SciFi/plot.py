@@ -26,7 +26,7 @@ plt.scatter(lichtAn[lichtAn.columns[0]],lichtAn[lichtAn.columns[2]],s=20,marker=
 plt.scatter(lichtAus[lichtAus.columns[0]],lichtAus[lichtAus.columns[2]],s=20,marker='+',linewidths=1,label='Light Off')
 plt.legend()
 plt.xlabel(r'$\lambda/$nm')
-plt.ylabel('Counts/a.u');
+plt.ylabel('Counts / a.u');
 plt.tight_layout()
 plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
@@ -37,7 +37,7 @@ plt.scatter(lichtAn[lichtAn.columns[0]],lichtAn[lichtAn.columns[2]]-lichtAn[lich
 plt.scatter(lichtAus[lichtAus.columns[0]],lichtAus[lichtAus.columns[2]]-lichtAus[lichtAus.columns[1]],s=20,marker='+',linewidths=1,label='Light Off')
 plt.legend()
 plt.xlabel(r'$\lambda/$nm')
-plt.ylabel('Counts/a.u');
+plt.ylabel('Counts / a.u');
 plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 plt.tight_layout()
 plt.savefig('build/DCsubtracted.pdf')
@@ -127,7 +127,7 @@ counts, bins, stf = plt.hist(dfM['thetha']*180/np.pi, bins=50, histtype='step', 
 plt.hist(dfK['thetha']*180/np.pi, bins=bins, histtype='step', linewidth=2,label='Core');
 plt.axvline(x=theta1, label=r'$\theta_1$', linewidth=2, c='tab:red')
 plt.axvline(x=theta2, label=r'$\theta_2$', linewidth=2, c='tab:green')
-plt.xlabel(r"\theta / Degrees")
+plt.xlabel(r"$\theta$ / Degrees")
 plt.ylabel("Counts / a.u.")
 plt.legend();
 plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
@@ -176,7 +176,7 @@ df = pd.concat((simK, simM))
 
 h = plt.hist2d(df['gpsPosX'],df['thetha']*180/np.pi,bins=(24,89), range=[[100,2400],[0,44.5]]);
 plt.colorbar()
-plt.xlabel(r'$x_{Exc}$ / mm')
+plt.xlabel(r'$x_\mathrm{Exc}$ / mm')
 plt.ylabel(r"$\theta$ / Degrees")
 plt.tight_layout();
 plt.savefig('build/Int2d.pdf')
@@ -233,7 +233,7 @@ for i in range(45):
 # popt, pcov = curve_fit(func2, theta, a)
 # print(popt,func2(theta, *popt))
 plt.scatter(theta, a, label='Fitparameters', marker="x")
-plt.plot(theta, func2(theta, a[0]-0.000013, a[0]/2), label='Theory courve', c='tab:orange')
+plt.plot(theta, func2(theta, a[0]-0.000013, a[0]/2), label='Theory curve', c='tab:orange')
 plt.xlabel(r"$\theta$ / Degrees")
 plt.ylabel(r'$a$ / $\mathrm{mm}^{-1}$')
 plt.legend();
@@ -285,7 +285,7 @@ for i in range(10):
     plt.plot(np.linspace(7*75,1425,60), func(np.linspace(7*75,1425,60), *popt2),c=color[i])
 plt.xlabel(r'$x_\mathrm{Exc}$ / mm')
 plt.ylabel("Counts / a.u.")
-plt.legend();
+plt.legend(loc='upper right');
 plt.tight_layout()
 plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 plt.savefig('build/dataFits.pdf')
@@ -304,8 +304,8 @@ popt, pcov = curve_fit(func2, np.linspace(0,36,10), a)
 
 plt.scatter(np.linspace(0,36,10), a, label='Fitparameters', marker="x")
 plt.scatter(32, a[8], marker="x", c='tab:red')
-# plt.plot(np.linspace(0,40,100), func2(np.linspace(0,40,100), a[0]-0.000013, a[0]/2), label='Theory courve', c='tab:orange')
-plt.plot(np.linspace(0,40,100), func2(np.linspace(0,40,100), *popt), label='Fitted courve', c='tab:orange')
+# plt.plot(np.linspace(0,40,100), func2(np.linspace(0,40,100), a[0]-0.000013, a[0]/2), label='Theory curve', c='tab:orange')
+plt.plot(np.linspace(0,40,100), func2(np.linspace(0,40,100), *popt), label='Fitted curve', c='tab:orange')
 plt.xlabel(r"$\theta$ / Degrees")
 plt.ylabel(r'$a$ / $\mathrm{mm}^{-1}$')
 plt.legend();
@@ -331,8 +331,8 @@ popt, pcov = curve_fit(func2, angle, a)
 
 plt.scatter(angle, a, label='Fitparameters', marker="x")
 
-# plt.plot(np.linspace(0,40,100), func2(np.linspace(0,40,100), a[0]-0.000013, a[0]/2), label='Theory courve', c='tab:orange')
-plt.plot(np.linspace(0,40,100), func2(np.linspace(0,40,100), *popt), label='Theory courve', c='tab:orange')
+# plt.plot(np.linspace(0,40,100), func2(np.linspace(0,40,100), a[0]-0.000013, a[0]/2), label='Theory curve', c='tab:orange')
+plt.plot(np.linspace(0,40,100), func2(np.linspace(0,40,100), *popt), label='Theory curve', c='tab:orange')
 plt.xlabel(r"$\theta$ / Degrees")
 plt.ylabel(r'$a$ / $\mathrm{mm}^{-1}$')
 plt.legend();
