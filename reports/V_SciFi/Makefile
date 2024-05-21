@@ -8,7 +8,7 @@ build/plot.pdf: plot.py ../matplotlibrc ../header-matplotlib.tex | build
 	TEXINPUTS=$$(pwd)/..: MATPLOTLIBRC=../matplotlibrc python plot.py
 
 # hier weitere Abhängigkeiten für build/v01.pdf deklarieren:
-build/v01.pdf: build/plot.pdf
+build/v01.pdf: build/angles.pdf
 
 build/v01.pdf: FORCE | build
 	# to find header and bib files in the main directory

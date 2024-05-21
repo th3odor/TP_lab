@@ -2,34 +2,35 @@
 \section{Analysis}
 \label{sec:Analysis}
 
-\subsection{Spectrometer Measurement}
+\subsection{Spectrometer measurement}
 
 Initially, the two measurements of the spectra are plotted and shown in \autoref{fig:lightonoff}. 
-These show the effect the light has on a measurement.
+These show the effect the roomlight has on a measurement.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{build/LightOnOff}
-	\caption{Original recorded wavelength spectra and their respective counts at a fixed distance and fixed angles.}
+	\caption{Recorded wavelength spectra and their respective counts at a fixed distance and fixed angles.}
 	\label{fig:lightonoff}
 \end{figure}
 
 To reduce the effect of external light sources, the counts during a measurement with the activated laser are subtracted by the
-so-called dark counts (measurements with the laser deactivated). The newly cleaned spectra are shown in \autoref{fig:dcsubtracted}.
+dark counts (measurements with the laser deactivated). The newly cleaned spectra are shown in \autoref{fig:dcsubtracted}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{build/DCsubtracted}
-	\caption{Wavelength spectra and their respective counts with the dark counts removed at a fixed distance and fixed angles.}
+	\caption{Wavelength spectra and their respective counts with the dark counts removed.}
 	\label{fig:dcsubtracted}
 \end{figure}
 
-\subsection{Radial Symmetry measurement}
+\subsection{Radial symmetry measurement}
 The goal of this part of the analysis is the visualization of the light intensity in relation to the horizontal and vertical measurement angles.
 The intensity is determined as the sum of the counts of a measured spectrum with the dark counts subtracted. 
-Additionally, each intensity is normed by dividing each by the highest measured intensity and plotted in a two-dimensional histogram shown in \autoref{fig:angles}
+Additionally, each intensity is normed via dividing by the highest measured intensity.
+The results are plotted in a two-dimensional histogram shown in \autoref{fig:angles}.
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{build/angles}
 	\caption{Angular distribution of the measured intensity in relation the horizontal and vertical angle.}
@@ -39,55 +40,53 @@ Additionally, each intensity is normed by dividing each by the highest measured 
 \subsection{Simulation}
 
 The simulated data is created using the software \texttt{GEANT4} and consists of 1200 Files with 14 features each. 
-These are used to gain insight into the inner workings of the fiber. 
+These are used to better understand the photon propagation in the fiber. 
 \subsubsection{Simulation cleaning}
 Due to errors in the simulation process, some of the generated events have to be removed. 
-This includes photons arriving at the photomultiplier outside of the fiber as well as photons that caused Rayleigh scattering. 
-The effect of the wrong generated measurements and the application of a requirement on the calculated \texttt{r\_exit} variable 
+This includes photons arriving at the photomultiplier outside of the fiber as well as photons that underwent Rayleigh scattering. 
+The effect of the wrongly generated events and the application of a requirement on the calculated \texttt{r\_exit} variable 
 (distance to the core of the fiber) $\mathtt{r\_exit}\leq \qty{0.125}{\milli\meter}$ is shown in \autoref{fig:rcut}.
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{build/rCut}
 	\caption{Distribution of the exit distances $r_\mathrm{min}$ in the simulation sample before and after the applied requirement (red line).}
 	\label{fig:rcut}
 \end{figure}
 
-Additionally, the simulation data is split into two samples for core and cladding photons. Where measurements of core photons have a \texttt{length\_clad} = 0 and cladding photons \texttt{length\_clad} $\neq$ 0.
+Additionally, the simulation data is split into two samples for core and cladding photons. Measurements of core photons have a \texttt{length\_clad} = 0 and cladding photons \texttt{length\_clad} $\neq$ 0.
 
-\subsubsection{Production Angle}
-Before plotting the angles of the theoretical maximum angles are determined using the formulas
+\subsubsection{Production angle}
+Before plotting the production angle distribution, the theoretical maximum angles at which total reflection occurs are determined using the formulas
 
 \begin{align*}
-	\theta_1 &= \arccos\left(\frac{n_2}{n_1}\right) = \qty{21.37}{\degree},\ \mathrm{and}\\
+	\theta_1 &= \arccos\left(\frac{n_2}{n_1}\right) = \qty{21.37}{\degree}\ \mathrm{and}\\
 	\theta_2 &= \arccos\left(\frac{n_3}{n_1}\right) = \qty{27.44}{\degree},
 \end{align*}
 where $n_1$, $n_2$, and $n_3$ are the refraction indices inside the scintillating fiber.
 Following the aforementioned step, the angles $\theta$ of the simulation data have to be determined by 
 calculating the angle between the momentum of the generated photon and the $x$-axis. 
 The histogrammed angles of both simulation data samples are shown in \autoref{fig:anglesmantlecore} along the two theoretically determined angles.
-%LINEAR FRAGE BEANTWORTEN
 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.65\linewidth]{build/AnglesMantleCore}
-	\caption{The angular distribution for both the core and cladding photons and the calculated maximum angles $\theta_1$ and $\theta_2$.}
+	\caption{Angular distribution for both the core and cladding photons and the calculated maximum angles $\theta_1$ and $\theta_2$.}
 	\label{fig:anglesmantlecore}
 \end{figure}
 
 
 \subsubsection{Minimum distance}
 
-For the next step, the minimum distance between the path of the photon and the $x$-axis is calculated using the formula 
+The minimum distance between the path of the photon and the $x$-axis is calculated using the formula 
 \begin{equation*}
 	r_\mathrm{min} = \left|\frac{z*p_y - p_zy}{\sqrt{p_z^2 + p_y^2}}\right|,
 \end{equation*}
-where $y$, $z$, $p_y$, and $p_z$ are the positions and momenta of the photon at its creation. 
-This formula is obtained by calculating the minimal distance of the photons path (starting point $x$, $y$, $z$ and direction $p_x$, $p_y$, $p_z$) from the$x$-axis. 
-Using the newly created variable and the already determined angle a two-dimensional histogram is created to visualize their relation. 
+where $y$, $z$, $p_y$, and $p_z$ are the positions and momenta of the photon at its starting point. 
+This formula is obtained by calculating the minimal distance of the photons path (starting point $x$, $y$, $z$ and direction $p_x$, $p_y$, $p_z$) from the $x$-axis. 
+Using this newly created variable and the already determined production angle, a two-dimensional histogram is created to visualize their relation. 
 The histogram for the core photons is shown in \autoref{fig:rminCore} and for the cladding photons in \autoref{fig:rminMantle}.
-%REL ERKLEREN
 
 \begin{figure}[H]
 	\centering
@@ -104,12 +103,13 @@ The histogram for the core photons is shown in \autoref{fig:rminCore} and for th
 	\caption{Two-dimensional histograms of the minimal distance $r_\mathrm{min}$ and angle $\theta$.}
 	\label{fig:rmin}
 \end{figure}
-\newpage
+
+
 \subsubsection{Intensity}
+
 The last study performed on the simulation samples focuses on the intensity relation described in \eqref{eq:Attentuation}. 
 The aforementioned relation is visualized in \autoref{fig:int2d} using a two-dimensional histogram of the angle 
 $\theta$ and the \texttt{gpsPosX} variable ($x$ position of the excitation in the fiber). 
-
 
 \begin{figure}[H]
 	\centering
@@ -118,12 +118,12 @@ $\theta$ and the \texttt{gpsPosX} variable ($x$ position of the excitation in th
 	\label{fig:int2d}
 \end{figure}
 
-Using the counts determined from the histogram multiple fits of the intensity in relation to the \texttt{gpsPosX} variable are performed. %For fitting the python package \cite{scif}
-The function 
+Using the counts determined from the histogram, multiple fits of the intensity in relation to the \texttt{gpsPosX} variable are performed. %For fitting the python package \cite{scif}
+As exlained in \autoref{sec:prop}, the intensity is described by \eqref{eq:intensity}, consequently the function 
 \begin{equation}
 	I(x) = I_0 \exp\left(-ax\right)
 \end{equation}
-used for the fits, results in the plots shown in \autoref{fig:simfits}.
+is used for the fits. Results for different horizontal angles are shown in \autoref{fig:simfits}.
 
 \begin{figure}[H]
 	\centering
@@ -132,34 +132,35 @@ used for the fits, results in the plots shown in \autoref{fig:simfits}.
 	\label{fig:simfits}
 \end{figure}
 
-The determined fit parameters $a$ and their corresponding angles $\theta$ are then plotted in \autoref{fig:simthetafit} alongside the theoretical curve for $a_{\mathrm{eff}}$ from \eqref{eq:Attentuation}.
+The determined fit parameter $a$ for each angle $\theta$ is then plotted in \autoref{fig:simthetafit} alongside the theoretical curve for $a_{\mathrm{eff}}$ from \eqref{eq:Attentuation}.
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{build/simThetaFit}
 	\caption{The determined fit parameters $a$ with their respective angle and the expected curve.}
 	\label{fig:simthetafit}
 \end{figure}
 
-\subsection{Intensity Measurement}
-Similarly to the intensity fits for the simulation the measured intensity is fitted against the \texttt{gpsPosX} variable. % and the determined fit parameters used to determine
+\subsection{Intensity measurement}
+Similarly to the intensity fits for the simulation, the measured intensity is fitted against the \texttt{gpsPosX} variable. % and the determined fit parameters used to determine
 The determined fits are shown in \autoref{fig:datafits}. Since the measurements don't follow the expected exponential slope, two fits per angle are performed and the mean of the fit parameter is used for further analysis.
 
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{build/dataFits}
 	\caption{Fits on the measured intensities against the \texttt{gpsPosX} variable at different angles $\theta$.}
 	\label{fig:datafits}
 \end{figure}
 
-The determined parameters $a$ are then again plotted against the angle $\theta$. On these parameters another function, of the form 
-\begin{equation*}
+The determined parameters $a$ are then again plotted against the angle $\theta$ in \autoref{fig:datathetafit}. Using these parameters, another function of the form 
+\begin{equation}
 	a(\theta) = \frac{A}{\cos(\theta)} + B \tan(\theta),
-\end{equation*}
-is fitted. The parameters and the corresponding fit are shown in \autoref{fig:datathetafit}
+	\label{eq:fit}
+\end{equation}
+is fitted. The parameters and the corresponding fit are also shown in \autoref{fig:datathetafit}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{build/DataThetaFit}
 	\caption{Fit on the determined fit parameters $a$ against their respective angles $\theta$ and the outlier (red).}
@@ -176,7 +177,10 @@ The data point marked red in \autoref{fig:datathetafit} lies far from the expect
 
 The performed fits result in the parameters shown in \autoref{tab:fitparam}.
 
+\begin{table}
 \begin{center}
+	\caption{Comparison of fit parameters for \eqref{eq:fit} with and without the outlier.}
+	\label{tab:fitparam}
 	\begin{tabular}{c c c}
 		\toprule
 		Parameter & Fit & Fit - Outlier excluded \\
@@ -184,9 +188,9 @@ The performed fits result in the parameters shown in \autoref{tab:fitparam}.
 		$A$ & \qty{1.548\pm0.435e-04}{\meter\tothe{-1}} & \qty{1.352\pm0.130e-04}{\meter\tothe{-1}} \\
 		$B$ & \qty{-4.850\pm11.471e-05}{\meter\tothe{-1}} & \qty{8.323\pm1.30e-05 }{\meter\tothe{-1}} \\
 		\bottomrule
-		\label{tab:fitparam}
 	\end{tabular}
 \end{center}
+\end{table}
 
 \subsection{Angle Intensity Measurement}
 For the final part of the analysis, the measured angle with the highest intensity is determined. 
