@@ -68,7 +68,7 @@ for (i,h) in enumerate(np.linspace(-18,26.8,15)):
 rad = (radialC - radialDC)/np.max((radialC - radialDC))
 
 
-sns.heatmap(rad, yticklabels=np.linspace(-18,26.8,15).round(1), xticklabels=np.linspace(-6,31.8,15).round(1))
+sns.heatmap(rad, yticklabels=np.linspace(-18,26.8,15).round(1), xticklabels=np.linspace(-6,31.8,15).round(1), cmap='Reds')
 plt.xlabel('Vertical angle / Degrees')
 plt.ylabel('Horizontal angle / Degrees');
 plt.tight_layout()
@@ -357,7 +357,7 @@ angle = np.linspace(0,44.5,90)
 counts, bins, stff = plt.hist(angle, weights=angleInt, bins=45,range=(0,45), histtype='step', linewidth = 2,color='tab:orange')
 plt.axvline(x=bins[angleInt.argmax()-1]+(bins[1]-bins[0])/2, label=r'$\theta_\mathrm{max}$', linewidth=2, c='tab:red')
 
-plt.xlabel(r"$\theta$ / Degrees")
+plt.xlabel("Horizontal Angle / Degrees")
 plt.ylabel("Counts / a.u.")
 plt.legend();
 plt.tight_layout()

@@ -63,7 +63,7 @@ Before plotting the angles of the theoretical maximum angles are determined usin
 	\theta_2 &= \arccos\left(\frac{n_3}{n_1}\right) = \qty{27.44}{\degree},
 \end{align*}
 where $n_1$, $n_2$, and $n_3$ are the refraction indices inside the scintillating fiber.
-Following the aforementioned step, the angles of the simulation data have to be determined by 
+Following the aforementioned step, the angles $\theta$ of the simulation data have to be determined by 
 calculating the angle between the momentum of the generated photon and the $x$-axis. 
 The histogrammed angles of both simulation data samples are shown in \autoref{fig:anglesmantlecore} along the two theoretically determined angles.
 %LINEAR FRAGE BEANTWORTEN
@@ -83,7 +83,10 @@ For the next step, the minimum distance between the path of the photon and the $
 \begin{equation*}
 	r_\mathrm{min} = \left|\frac{z*p_y - p_zy}{\sqrt{p_z^2 + p_y^2}}\right|,
 \end{equation*}
-where $y$, $z$, $p_y$, and $p_z$ are the positions and momenta of the photon at its creation. Using the newly created variable and the already determined angle a two-dimensional histogram is created to visualize their relation. The histogram for the core photons is shown in \autoref{fig:rminCore} and for the cladding photons in \autoref{fig:rminMantle}.
+where $y$, $z$, $p_y$, and $p_z$ are the positions and momenta of the photon at its creation. 
+This formula is obtained by calculating the minimal distance of the photons path (starting point $x$, $y$, $z$ and direction $p_x$, $p_y$, $p_z$) from the$x$-axis. 
+Using the newly created variable and the already determined angle a two-dimensional histogram is created to visualize their relation. 
+The histogram for the core photons is shown in \autoref{fig:rminCore} and for the cladding photons in \autoref{fig:rminMantle}.
 %REL ERKLEREN
 
 \begin{figure}[H]
@@ -186,7 +189,7 @@ The performed fits result in the parameters shown in \autoref{tab:fitparam}.
 \end{center}
 
 \subsection{Angle Intensity Measurement}
-For the final part of the analysis angle with the highest intensity is determined. 
+For the final part of the analysis, the measured angle with the highest intensity is determined. 
 The intensities for each angle are again calculated as the sum of the cleaned counts of each measurement. 
 The angle determined to have the highest intensity is $\theta = \qty{14.5}{\degree}$. 
 Both the angular distribution and the maximum angle are shown in \autoref{fig:maxangle}.
