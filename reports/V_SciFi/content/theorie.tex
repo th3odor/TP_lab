@@ -9,18 +9,24 @@ with simulated data.
 \label{sec:Theory}
 
 In detectors for high energy particle physics, a precise track reconstruction is crucial to succefully analyse collision events.
-There are many different solutions to realising such a tracking detector, each with their own advantages and disadvanteges, for example
-in regard to their resolution, size, cost. Scintilators are one type of such a tracking detector, used as an example by the famous
+There are many different solutions to realising such a tracking detector, each with their own advantages and disadvantages, for example
+in regard to their resolution, size, cost. Tracking devices using scintillators are one type of such a detector, an example of their application is the famous
 LHCb experiment. If charged particles pass through a scintillator, photons are emmited that can be measured. The following section will explain
 how a tracking detector can be constructed using this principle.
 
 \subsection{Scintilating fiber trackers}
 
 A tracker is constructed by using many individual scintillating fibers. If a charged particle passes through one of these fibers, photons are produced that
-travel towards the end of the fiber, where they can be detected. The main advanteges of this type of tracker is its high resolution, as the fibers can
-be constructed rather thin (\qty{250}{\micro\meter} in LHCb). Penetrating particles are scattered less in the fibers compared to other methods,
-so the error introduced by the detector is kept low. Lastly, these fibers are inexpensive, so a large surface can be covered which increases
-the sensitivity of the detector \cite{SciFi}.
+travel towards the end of the fiber, where they can be detected. The main advantages of this type of tracker is its high resolution, as the fibers can
+be constructed rather thin (\qty{250}{\micro\meter} in LHCb). As the probability of a single fiber being hit by a charged particle can be decribed by a uniform distribution,
+the resolution of a fiber of width $d$ can be calculated using the standard deviation of this distribution:
+\begin{equation*}
+    \sigma_{\text{fiber}} = \sqrt{\frac{d^2}{12}} .
+\end{equation*}
+Inserting the given width of \qty{250}{\micro\meter}, a resolution of $\approx \qty{72}{\micro\meter}$ results.
+Penetrating particles are scattered less in the fibers compared to other methods,
+consequently the error introduced by the detector is kept low. Lastly, these fibers are inexpensive meaning a large surface can be covered, this increases
+the total amount of particles that can be measured by the detector \cite{SciFi}.
 The single fibers are combined into fiber mats, by arranging them in a hexagonal pattern to minimize uncovered area and glueing
 them together using an epoxy. A cross section of this arrangment can be seen in \autoref{fig:fiber-mats}.
 
@@ -31,15 +37,15 @@ them together using an epoxy. A cross section of this arrangment can be seen in 
 	\label{fig:fiber-mats}
 \end{figure}
 
-In case of the LHCb detector four layers, each consisting of 40 mats, are positioned behind each other. The middle layers are tilted by \qty{5}{\degree}
-to allow a spacial resolution in the entire plane perpendicular to the beam pipe.
+In case of the LHCb detector four layers, each consisting of 40 mats, are positioned behind each other. The middle layers are tilted by \qty{+-5}{\degree}
+to allow a spacial resolution in the entire plane perpendicular to the beam pipe. There are three individual tracking stations constructed in this way.
 
 The photons created by the scintillations travel to the ends of the fibers and are detected there using silicon photomultipliers.
 These consit of avalanche photodiodes, where each diode represents a pixel. If a photon hits a pixel, an electron-hole pair is created
 in the diode. Due to an applied high voltage, the electrons are accelerated and trigger more electron-hole pairs to form.
 Consequentlly, a charge avalanche is registered in form of a current pulse. After a short recovery time, the pixel is ready to sense another signal.
 The silicon photomultipliers cannot detect all incoming photons, they have a photodetection efficiency depending on the wavelength of
-the photons. At the optimal wavelength, approximatly \qty{43}{\percent} of photons are detected. The silicon photomultipliers themselves
+the photons. At the optimal wavelength, a maximum of \qty{43}{\percent} of photons can be detected. The silicon photomultipliers themselves
 are not sensitive to the wavelength of the light and thus measure an effective attenuation over all wavelengths. Lastly, there will
 always be a certain noise within the pixels leading to the presence of a dark current, even if no photons hit the pixel.
 
