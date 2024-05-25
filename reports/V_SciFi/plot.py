@@ -354,7 +354,7 @@ angleInt = np.zeros(90)
 for i in range(90):
     angleInt[i] = (angleC[i] - angleDC[i])['C1'].sum()
 angle = np.linspace(0,44.5,90)
-counts, bins, stff = plt.hist(angle, weights=angleInt, bins=45,range=(0,45), histtype='step', linewidth = 2,color='tab:orange')
+counts, bins, stff = plt.hist(angle, weights=angleInt*np.sin(angle), bins=45,range=(0,45), histtype='step', linewidth = 2,color='tab:orange')
 plt.axvline(x=bins[angleInt.argmax()-1]+(bins[1]-bins[0])/2, label=r'$\theta_\mathrm{max}$', linewidth=2, c='tab:red')
 
 plt.xlabel("Horizontal Angle / Degrees")
