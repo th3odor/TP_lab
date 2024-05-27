@@ -8,7 +8,37 @@ from scipy.optimize import curve_fit
 from copy import deepcopy
 
 
+angleC = []
+angleDC = []
+for i in range(45):
+    angleC.append(pd.read_csv(f'data_local/TheoCanAngle/Attenuation_h={i}deg_v=0deg_x=0mm.txt', sep='\t'))
+    angleC.append(pd.read_csv(f'data_local/TheoCanAngle/Attenuation_h={i}.5deg_v=0deg_x=0mm.txt', sep='\t'))
+    angleDC.append(pd.read_csv(f'data_local/TheoCanAngle/DarkCounts_h={i}deg_v=0deg.txt', sep='\t'))
+    angleDC.append(pd.read_csv(f'data_local/TheoCanAngle/DarkCounts_h={i}.5deg_v=0deg.txt', sep='\t'))
 
+
+
+angleInt = np.zeros(90)
+for i in range(90):
+    angleInt[i] = (angleC[i] - angleDC[i])['C1'].sum()
+angle = np.linspace(0,44.5,90)
+
+print(angleInt*np.sin(angle/90*np.pi))
+
+counts, bins, stff = plt.hist(angle, weights=angleInt*np.sin(angle/90*np.pi), bins=45,range=(0,45), histtype='step', linewidth = 2,color='tab:orange')
+KYS = angleInt*np.sin(angle/90*np.pi)
+plt.axvline(x=bins[int(KYS.argmax()*0.5)    ]+(bins[1]-bins[0])/2, label=r'$\theta_\mathrm{max}$', linewidth=2, c='tab:red')
+
+plt.xlabel("Horizontal Angle / Degrees")
+plt.ylabel("Counts / a.u.")
+plt.legend();
+plt.tight_layout()
+plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+plt.savefig('build/MaxAngle.pdf')
+plt.close()
+
+
+print('Max angle:',bins[int(KYS.argmax()*0.5)]+(bins[1]-bins[0])/2)
 
 
 sim=[]
@@ -341,29 +371,4 @@ plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 plt.savefig('build/DataThetaFitAlt.pdf')
 plt.close()
 
-angleC = []
-angleDC = []
-for i in range(45):
-    angleC.append(pd.read_csv(f'data_local/TheoCanAngle/Attenuation_h={i}deg_v=0deg_x=0mm.txt', sep='\t'))
-    angleC.append(pd.read_csv(f'data_local/TheoCanAngle/Attenuation_h={i}.5deg_v=0deg_x=0mm.txt', sep='\t'))
-    angleDC.append(pd.read_csv(f'data_local/TheoCanAngle/DarkCounts_h={i}deg_v=0deg.txt', sep='\t'))
-    angleDC.append(pd.read_csv(f'data_local/TheoCanAngle/DarkCounts_h={i}.5deg_v=0deg.txt', sep='\t'))
 
-
-angleInt = np.zeros(90)
-for i in range(90):
-    angleInt[i] = (angleC[i] - angleDC[i])['C1'].sum()
-angle = np.linspace(0,44.5,90)
-counts, bins, stff = plt.hist(angle, weights=angleInt*np.sin(angle), bins=45,range=(0,45), histtype='step', linewidth = 2,color='tab:orange')
-plt.axvline(x=bins[angleInt.argmax()-1]+(bins[1]-bins[0])/2, label=r'$\theta_\mathrm{max}$', linewidth=2, c='tab:red')
-
-plt.xlabel("Horizontal Angle / Degrees")
-plt.ylabel("Counts / a.u.")
-plt.legend();
-plt.tight_layout()
-plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-plt.savefig('build/MaxAngle.pdf')
-plt.close()
-
-
-print('Max angle:',bins[angleInt.argmax()-1]+(bins[1]-bins[0])/2)
