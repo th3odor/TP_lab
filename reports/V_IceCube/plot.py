@@ -1,5 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+
+signal = pd.read_csv('data_local/signal_train.txt', sep=',')
+background = pd.read_csv('data_local/background.txt', sep=',')
+test = pd.read_csv('data_local/test.txt', sep=',')
 
 x = np.linspace(0, 10, 1000)
 y = x ** np.sin(x)
