@@ -1,8 +1,33 @@
-\section{Goal}
-The goal of this analysis is the 
+\section{Goals}
+The goal of this analysis is the classification of neutrino measurements in data from the IceCube experiment. 
+This is achieved using the application of the minimum redundancy, maximum relevance (mRMR) selection to determine the best features and the comparison of three different machine learning algorithms for the classification.
 
 
-\section{Theorie}
-\label{sec:Theorie}
-test
-\cite{sample}
+\section{Theory}
+\label{sec:Theory}
+In order to understand the performed analysis it is important to investigate the origin of the measured particles and the applied algorithms. 
+
+\subsection{Cosmic Rays}
+So-called "Cosmic Rays" consist of highly energetic particles, for examples protons, electrons, different nuclei as well as neutrinos. 
+The study on these particles have been a point of interest for many centuries but the therm cosmic "Cosmic rays" was established in the early 20-th century. 
+Incoming cosmic rays usually interact with the matter in the earths atmosphere creating particle showers. 
+These incoming particles originate from a variety of different sources in the cosmos ranging form active galactic nuclei or supernovae.
+Their energy spectrum is described by
+\begin{equation*}
+	\frac{\mathrm{d}\Phi}{\mathrm{d}E} = \Phi_0 E^\gamma,
+\end{equation*}
+where $\gamma \approx -2.7$ is the so-called spectral index. 
+The energy carried by these particles can range up to $10^{20}\,\unit{\eV}$.
+
+
+\subsection{Atmospheric and astrophysical leptons}
+Through the showers launched by cosmic rays a range of different particles is created. 
+High energetic muons and neutrinos for example originate mostly from the decay of lighter mesons in atmospheric particle showers. 
+In the IceCube experiment these are refereed to as \textit{Conventional}. 
+As the lighter mesons loose some of their energy the resulting energy spectrum for the muons 
+end neutrinos is lower and follows a $E^{\gamma-1}$ proportionality. 
+If the muons and neutrinos originate from heavier hadrons, 
+(e.g $\Lambda$-baryons or $D$-mesons) then their energy spectrum will resembles much more those from astrophysical ones. 
+This is caused by the short lifetime of the heavier hadrons, leaving them less time to loose energy.
+When a astrophysical particle is detected at the IceCube experiment it is then called \textit{prompt}.
+
