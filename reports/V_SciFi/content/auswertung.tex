@@ -57,7 +57,7 @@ The effect of the wrongly generated events and the application of a requirement 
 Additionally, the simulation data is split into two samples for core and cladding photons. Measurements of core photons have a \texttt{length\_clad} = 0 and cladding photons \texttt{length\_clad} $\neq$ 0.
 
 \subsubsection{Production angle}
-Initially the angles for which internal reflection can still occur are determined using the formulas
+Initially the maximum angles for which internal reflection can occur are determined using the formulas
 
 \begin{align*}
 	\theta_1 &= \arccos\left(\frac{n_2}{n_1}\right) = \qty{21.37}{\degree}\ \mathrm{and}\\
@@ -104,6 +104,10 @@ The histogram for the core photons is shown in \autoref{fig:rminCore} and for th
 	\label{fig:rmin}
 \end{figure}
 
+This distribution results from the fact that photons with $r_\mathrm{min}>0$ values can experience
+total reflection even if their angle $\theta$ is larger than the already determined maximal angle. 
+This is explained by the effective angle between the photon and the cladding beeing lower then $\theta$ 
+when the photon in not passing through the middle of the fiber.
 
 \subsubsection{Intensity}
 
@@ -123,7 +127,7 @@ As exlained in \autoref{sec:prop}, the intensity is described by \eqref{eq:inten
 \begin{equation}
 	I(x) = I_0 \exp\left(-ax\right)
 \end{equation}
-is used for the fits. Results for different horizontal angles are shown in \autoref{fig:simfits}.
+is used for the fits. A subsection of the detrmined fits for different horizontal angles is shown in \autoref{fig:simfits}.
 
 \begin{figure}[H]
 	\centering
