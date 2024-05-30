@@ -31,3 +31,56 @@ If the muons and neutrinos originate from heavier hadrons,
 This is caused by the short lifetime of the heavier hadrons, leaving them less time to loose energy.
 When a astrophysical particle is detected at the IceCube experiment it is then called \textit{prompt}.
 
+\subsection{mRMR Selection}
+The mRMR selection algorithm is implemented using python library \texttt{mrmr-selection}. This algorithm works by maximizing the correlation to the target and tries to minimize the correlation between the individual features. This is achieved using the joint information 
+\begin{equation*}
+	I(x,y) = \int p(x,y)\log\left(\frac{p(x,y)}{p(x)p(y)}\right)\mathrm{d}x\mathrm{d}y,
+\end{equation*}
+where $p(x),p(y),p(x,y)$ are the probability density of the different features. It is a feature selection algorithm independent of the type of learner applied.
+
+\subsection{Naive Bayes Classifier}
+The Naive Bayes Classifier uses a Bayesian approach in order to classify candidates as signal $A$ or background $\bar{A}$. It assumes the probability $p(B|A)$ to be background/signal with the given feature $V$ is only dependent on $B$ (naive). The classifier calculates
+\begin{equation*}
+	Q = \prod_{i=1}^{n} \frac{p(B_i|A)}{p(B_i|\bar{A})},
+\end{equation*}
+which is $> 1$ for a signal and $< 1$ for a background prediction.
+
+\subsection{Random Forest Classifier}
+A random forest classifier uses $k$ binary decision trees, which by minimizing a loss function try to determine ideal cuts on the given features. Each tree is trained on a random subset of the data in order to avoid over training. The determined result of each tree is then averaged or the majority voting is used depending on the implementation. 
+
+\subsection{Multi-Layer Perceptron Classifier}
+The Multi-Layer Perceptron Classifier (MLPClassifier) is a classic neural network with LBFGS loss function. It is trained using labeled data. As the MLPClassifier usually is implemented with multiple hidden layers it allows classification of non linear problems.
+
+\subsection{Evaluation of the Models}
+All the above mentioned models are evaluated using a range of metrics. During the classification a subsample of the training data is used to check the models for over training. This procedure is called cross validation and it can contain for example crosschecks of the loss function for training and validation data. After the training the accuracy $a$ and the precision $p$ are determined on a test data sample using 
+\begin{align*}
+	a =& \frac{\mathrm{TP + TN}}{\mathrm{TP + TN + FP + FN}},\ \mathrm{and}\\
+	p=&  \frac{\mathrm{TP}}{\mathrm{TP + FP}},
+\end{align*}
+where TP + TN + FP + FN are correctly classified signal (TP) and background (TN) and respectively falsely classified signal (FP) and background (FN). Ideally both values are close to 1. 
+Additionally 
+\begin{equation}
+	f_\beta = (1+\beta^2) \frac{p\cdot r}{\beta^2p+r}
+\end{equation}
+is calculated using the Recall
+\begin{equation*}
+r = \frac{\mathrm{TP}}{\mathrm{TP + FN}}.
+\end{equation*}
+Lastly the Receiver Operating Characteristic (ROC) curve is determined by plotting the True Positive Rate 
+\begin{equation*}
+	\mathrm{TPR} = \frac{\mathrm{TP}}{\mathrm{TP + FN}}
+\end{equation*}
+against the False Positive Rate 
+\begin{equation*}
+	\mathrm{TPR} = \frac{\mathrm{FP}}{\mathrm{FP + TN}}
+\end{equation*}
+for different cut values $\tau_c$ on the prediction of the classifier. The metric containing quality of the classification is the area under the aforementioned curve. A value of 0.5 results from random guessing whereas a value of 1 is ideal.
+
+
+
+
+
+
+
+
+
