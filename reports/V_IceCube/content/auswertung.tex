@@ -1,54 +1,100 @@
-\section{Auswertung}
+\section{Data analysis}
 \label{sec:Auswertung}
+
+In total, three different data sets are available for this analysis. 
+The training of the classifiers will be performed using the two datasets
+\texttt{signal\_train.csv} and \texttt{background\_train.csv}, while the
+\texttt{test.csv} file will be used to test the created model.
+
+\subsection{Data preprocessing}
+
+The events in the signal and background training datasets were produced via Monte Carlo simulations.
+Consequently, the datasets contain Monte Carlo truths, event ids and weights which should not be
+used during the training process, as they are not present in actual data.
+All attributes with a name containing the key words \texttt{Weight}, \texttt{MC}, \texttt{Corsika}, or
+\texttt{I3EventHeader} are removed from the datasets.
+The training data is labeled with $0$ for background and $1$ for signal, these labels are also removed and 
+stored, as they should only be used for validation purposes. Some entries contain \texttt{Nans} or
+\texttt{Infs}, which have to be removed. As a first step, all attributes where more than \qty{10}{\percent}
+of events are \texttt{Nans} or \texttt{Infs} are removed. The remaining invalid values are adressed by
+deleting all events where any attribute is \texttt{Nan} or \texttt{Inf}.
+Lastly, the data is rescaled by removing the mean and scaling to unit variance.
+
+\subsection{Attribute selection}
+
+Before the multivariate section can be performed, a selection of attributes is needed wich the classifier
+will be using. The goal is to choose attributes which contain the most information about wether an event
+is signal or background. Using all available attributes is avoided as this can lead to overtraining and
+increases computational time.
+The selection is performed using the mRMR method described in \autoref{sec:mRmR}. Using the package
+\texttt{mrmr\_selection} \cite{mrmr}, the $100$ best features are determined in ascending order.
+In \autoref{fig:features}, the distributions of the four best features for signal and background events
+are shown.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{build/features.pdf}
-  \caption{TODO.}
+  \includegraphics[width=1\textwidth]{build/features.pdf}
+  \caption{Distributions of the four best features determined via the mRMR method, for signal and background events.}
   \label{fig:features}
 \end{figure}
 
+\subsection{Multivariate selection}
+
+In this section, three different models are trained and compared. 
+
+\subsubsection{Naives Bayes}
+
+The first model used is the naives bayes classifier. To determine the optimal amount of
+features, the model is trained and tested multiple times with different numbers of attributes.
+Quality parameters  are computed for each case and plotted against the number of features in \autoref{fig:NaiveBayes_features}.
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{build/NaiveBayes_features.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.9\textwidth]{build/Naive_Bayes/Naive_Bayes_features.pdf}
+  \caption{Quality parameters of the Naive Bayes classifier for a varying number of features.}
   \label{fig:NaiveBayes_features}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{build/NaiveBayes_confusion.pdf}
+  \includegraphics[width=0.6\textwidth]{build/Naive_Bayes/Naive_Bayes_confusion.pdf}
   \caption{TODO.}
   \label{fig:NaiveBayes_confusion}
 \end{figure}
 
+\subsubsection{Random Forest}
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{build/RandomForest_features.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.9\textwidth]{build/Random_Forest/Random_Forest_features.pdf}
+  \caption{Quality parameters of the Random Forest for a varying number of features.}
   \label{fig:RandomForest_features}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{build/RandomForest_confusion.pdf}
+  \includegraphics[width=0.6\textwidth]{build/Random_Forest/Random_Forest_confusion.pdf}
   \caption{TODO.}
   \label{fig:RandomForest_confusion}
 \end{figure}
 
+\subsubsection{Neural Network}
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{build/NeuralNetwork_features.pdf}
-  \caption{TODO.}
+  \includegraphics[width=0.9\textwidth]{build/Neural_Network/Neural_Network_features.pdf}
+  \caption{Quality parameters of the Neural Network for a varying number of features.}
   \label{fig:NeuralNetwork_features}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{build/NeuralNetwork_confusion.pdf}
+  \includegraphics[width=0.6\textwidth]{build/Neural_Network/Neural_Network_confusion.pdf}
   \caption{TODO.}
   \label{fig:NeuralNetwork_confusion}
 \end{figure}
+
+\subsection{Classification of test data}
 
 \begin{figure}[H]
   \centering
