@@ -32,6 +32,7 @@ This is caused by the short lifetime of the heavier hadrons, leaving them less t
 When a astrophysical particle is detected at the IceCube experiment it is then called \textit{prompt}.
 
 \subsection{mRMR Selection}
+\label{sec:mRmR}
 The mRMR selection algorithm is implemented using python library \texttt{mrmr-selection}. This algorithm works by maximizing the correlation to the target and tries to minimize the correlation between the individual features. This is achieved using the joint information 
 \begin{equation*}
 	I(x,y) = \int p(x,y)\log\left(\frac{p(x,y)}{p(x)p(y)}\right)\mathrm{d}x\mathrm{d}y,

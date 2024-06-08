@@ -209,7 +209,7 @@ def model_eval(model, model_name, n_feautures, beta, tau_range, tau_plot):
     y_predict = (y_predict_proba[:,1] > tau_best).astype(int)
     c_mat = confusion_matrix(label, y_predict)
     ax = sn.heatmap(c_mat, annot=True, cmap = "Blues", fmt='g',cbar_kws={'label': 'Counts'})
-    ax.set(xlabel="Actual label", ylabel="Predicted label")
+    ax.set(xlabel="Predicted label", ylabel="Actual label")
     plt.tight_layout()
     plt.savefig(f'build/{model_name}/{model_name}_confusion.pdf')
     plt.close()
@@ -236,7 +236,7 @@ RF, FP_RF, TP_RF, tau_RF = model_eval(RandomForestClassifier(100), "Random_Fores
 
 
 num_features(MLPClassifier((60,10)), "Neural_Network")
-NN, FP_NN, TP_NN, tau_NN = model_eval(MLPClassifier((60,10)), "Neural_Network", 60, beta = 0.1, tau_range=[0.999,1], tau_plot=[0.995,1])
+NN, FP_NN, TP_NN, tau_NN = model_eval(MLPClassifier((60,10)), "Neural_Network", 60, beta = 0.1, tau_range=[0.998,1], tau_plot=[0.995,1])
 
 
 ## Comparing classifiers ##

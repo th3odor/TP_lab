@@ -21,6 +21,7 @@ deleting all events where any attribute is \texttt{Nan} or \texttt{Inf}.
 Lastly, the data is rescaled by removing the mean and scaling to unit variance.
 
 \subsection{Attribute selection}
+\label{sec:att_selection}
 
 Before the multivariate section can be performed, a selection of attributes is needed wich the classifier
 will be using. The goal is to choose attributes which contain the most information about wether an event
@@ -40,13 +41,18 @@ are shown.
 
 \subsection{Multivariate selection}
 
-In this section, three different models are trained and compared. 
+In this section, three different models are trained and compared. All models are used from the \texttt{scikit-learn}
+libary \cite{scikit-learn}.
 
 \subsubsection{Naives Bayes}
 
-The first model used is the naives bayes classifier. To determine the optimal amount of
+The first model used is the Naives Bayes classifier. To determine the optimal amount of
 features, the model is trained and tested multiple times with different numbers of attributes.
-Quality parameters  are computed for each case and plotted against the number of features in \autoref{fig:NaiveBayes_features}.
+For each case, the best attributes determined in \autoref{sec:att_selection} are used, e.g. at first 
+only the best five features are selected, then the best ten features and so on.
+Quality parameters are computed for each case and plotted against the number of features in \autoref{fig:NaiveBayes_features}.
+The accuracy, precision and ROC score are chosen as the quality parameters for all three
+models tested in this analysis.
 
 \begin{figure}[H]
   \centering
@@ -55,14 +61,53 @@ Quality parameters  are computed for each case and plotted against the number of
   \label{fig:NaiveBayes_features}
 \end{figure}
 
+Since the Naive Bayes is a very simple model, adding more then five features only leads to random
+fluctuations in the model performance. This is excpected, as the model has a low capacity and
+cannot make use of the additional information provided when more features are given.
+This is why only the five best attributes are used to train this classifier.
+To validate the classifiers performance, a k-folding algorithm is used with five splits.
+This means that the data is split in five parts, the classifier is then trained on four parts and tested using
+the remaining part. In this fashion, five classifiers are each trained and tested on different subsets,
+if the model is working good the results should be similar for all choices of subsets.
+The scores of the Naive Bayes classifier are determined to be
+\begin{align*}
+  \text{Accuracy} &= 0.8432\pm0.0029 \,, \\
+  \text{Precision} &= 0.9074\pm0.0019 \,, \\
+  \text{ROC Score} &= 0.9278\pm0.0013 \,.
+\end{align*}
+The optimal decision threshold for the predicted probabilities is calculated using
+the $f_\beta$ score. Here, $\beta=0.1$ is used, meaning that much more importance
+is placed on the precision of the Classification rather then the accuracy.
+The $f_\beta$ score is computed for each possible threshold $\tau_c$, then
+the maximum value is determined and consequently the best value for $\tau_c$.
+The score and its maximum are displayed in \autoref{fig:NaiveBayes_threshold}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{build/Naive_Bayes/Naive_Bayes_threshold.pdf}
+  \caption{The $f_\beta$ score of the Naive Bayes classifier and its maximum value.}
+  \label{fig:NaiveBayes_threshold}
+\end{figure}
+
+At the maximum, the best value of the cut $\tau_{c \text{, best}}$ is also given in \autoref{fig:NaiveBayes_threshold}.
+After applying the determined cut on the predicted probabilities of the Naive Bayes model,
+a confusion matrix shown in \autoref{fig:NaiveBayes_confusion} is created.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{build/Naive_Bayes/Naive_Bayes_confusion.pdf}
-  \caption{TODO.}
+  \caption{Confusion matrix for the Naive Bayes classifier.}
   \label{fig:NaiveBayes_confusion}
 \end{figure}
 
+Due to the low capacity of the model and the high focus on precision, a lot of signal events are missed.
+
 \subsubsection{Random Forest}
+
+The steps performed for the Random Forest are identical to the ones from the Naive Bayes model.
+The Random Forest is initialized with $100$ trees.
+The optimal number of features is again chosen by evaluating the scores in
+\autoref{fig:RandomForest_features}.
 
 \begin{figure}[H]
   \centering
@@ -71,14 +116,45 @@ Quality parameters  are computed for each case and plotted against the number of
   \label{fig:RandomForest_features}
 \end{figure}
 
+The model stops improving when using more than $60$ features, so this number is chosen for the Random Forest.
+As before, the performance of the Random Forest is determined via k-folding the training data
+with five splits, the results are
+
+\begin{align*}
+  \text{Accuracy} &= 0.9731\pm0.0014 \,, \\
+  \text{Precision} &= 0.9873\pm0.0030 \,, \\
+  \text{ROC Score} &= 0.99566\pm0.00027 \,.
+\end{align*}
+
+The optimal decision threshold is determined in the same way as before, \autoref{fig:RandomForest_threshold}
+shows the $f_\beta$ score and its maximum.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{build/Random_Forest/Random_Forest_threshold.pdf}
+  \caption{The $f_\beta$ score of the Random Forest classifier and its maximum value.}
+  \label{fig:RandomForest_threshold}
+\end{figure}
+
+The resulting best cut $\tau_{c \text{, best}}$ is also given in \autoref{fig:RandomForest_threshold}. The resulting confusion matrix 
+when using this threshold is given in \autoref{fig:RandomForest_confusion}
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{build/Random_Forest/Random_Forest_confusion.pdf}
-  \caption{TODO.}
+  \caption{Confusion matrix for the Random Forest classifier.}
   \label{fig:RandomForest_confusion}
 \end{figure}
 
+The results are far better compared with the Naive Bayes approach, almost none of the
+$\approx 35.000$ events have been incorrectly labeled as signal.
+
 \subsubsection{Neural Network}
+
+The third model used is a Neural Network in form of a multi-Layer Perceptron classifier.
+The Network consists of two hidden layers with sizes $60$ and $10$, respectively.
+The best number of features is again chosen according to the results shown in
+\autoref{fig:NeuralNetwork_features}.
 
 \begin{figure}[H]
   \centering
@@ -87,18 +163,56 @@ Quality parameters  are computed for each case and plotted against the number of
   \label{fig:NeuralNetwork_features}
 \end{figure}
 
+As with the Random Forest, no improvement can be seen after using more than
+$60$ features, so again $60$ is chosen as the number of features here.
+The results from using k-folding become
+\begin{align*}
+  \text{Accuracy} &= 0.9711\pm0.0015 \,, \\
+  \text{Precision} &= 0.972\pm0.004 \,, \\
+  \text{ROC Score} &= 0.99603\pm0.00034 \,.
+\end{align*}
+
+\autoref{fig:NeuralNetwork_threshold} shows the $f_\beta$ score and its maximum.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{build/Neural_Network/Neural_Network_threshold.pdf}
+  \caption{The $f_\beta$ score of the Neural Network and its maximum value.}
+  \label{fig:NeuralNetwork_threshold}
+\end{figure}
+
+Since the Neural Network tends to give predictions either close to zero or one,
+a very high cut has to be chosen, the $\tau_{c \text{, best}}$ value is given in
+\autoref{fig:NeuralNetwork_threshold}.
+After applying this cut, the confusion matrix shown in \autoref{fig:NeuralNetwork_confusion}
+results.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{build/Neural_Network/Neural_Network_confusion.pdf}
-  \caption{TODO.}
+  \caption{Confusion matrix for the Neural Network.}
   \label{fig:NeuralNetwork_confusion}
 \end{figure}
 
+Just as with the Random Forest, almost all signal is labeled correctly.
+However, a slighlty larger portion of signal events is labeled as background.
+
 \subsection{Classification of test data}
+
+To make a prediction on the provided test data, one of the three models has
+to be chosen. The Naive Bayes classifier is ruled out due to its low performance.
+When comparing the Random Forest with the Neural Network, it becomes apparent that
+the Random Forest performes slightly better based on the confusion matrices.
+A comparison of the ROC curves of each classifier is shown in \autoref{fig:roc_curves}.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{build/roc_curves.pdf}
-  \caption{TODO.}
+  \caption{Comparison of the ROC curves of the three different classifiers.}
   \label{fig:roc_curves}
 \end{figure}
+
+While the Random Forest and Neural Network dont show a large difference here, the
+lower performance of the Naive Bayes approach is clearly visible.
+Consequently, the Random Forest is applied to the test sample, on which it
+identifies $1897$ events as signal.
