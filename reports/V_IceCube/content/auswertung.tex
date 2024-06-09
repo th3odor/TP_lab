@@ -13,18 +13,18 @@ Consequently, the datasets contain Monte Carlo truths, event ids and weights whi
 used during the training process, as they are not present in actual data.
 All attributes with a name containing the key words \texttt{Weight}, \texttt{MC}, \texttt{Corsika}, or
 \texttt{I3EventHeader} are removed from the datasets.
-The training data is labeled with $0$ for background and $1$ for signal, these labels are also removed and 
+The training data is already labeled with $0$ for background and $1$ for signal. These labels are removed and 
 stored, as they should only be used for validation purposes. Some entries contain \texttt{Nans} or
 \texttt{Infs}, which have to be removed. As a first step, all attributes where more than \qty{10}{\percent}
-of events are \texttt{Nans} or \texttt{Infs} are removed. The remaining invalid values are adressed by
+of entries are \texttt{Nans} or \texttt{Infs} are removed. The remaining invalid values are adressed by
 deleting all events where any attribute is \texttt{Nan} or \texttt{Inf}.
 Lastly, the data is rescaled by removing the mean and scaling to unit variance.
 
 \subsection{Attribute selection}
 \label{sec:att_selection}
 
-Before the multivariate section can be performed, a selection of attributes is needed wich the classifier
-will be using. The goal is to choose attributes which contain the most information about wether an event
+Before the multivariate section can be performed, a selection of attributes is needed that the classifier
+can use. The goal is to choose attributes which contain the most information about wether an event
 is signal or background. Using all available attributes is avoided as this can lead to overtraining and
 increases computational time.
 The selection is performed using the mRMR method described in \autoref{sec:mRmR}. Using the package
@@ -39,9 +39,12 @@ are shown.
   \label{fig:features}
 \end{figure}
 
+All distributions show a good seperation of signal and background, which is excpected
+from the best features determined by the mRMR method.
+
 \subsection{Multivariate selection}
 
-In this section, three different models are trained and compared. All models are used from the \texttt{scikit-learn}
+In this section, three different models are trained and compared. All models are implemented from the \texttt{scikit-learn}
 libary \cite{scikit-learn}.
 
 \subsubsection{Naives Bayes}
@@ -77,7 +80,7 @@ The scores of the Naive Bayes classifier are determined to be
 \end{align*}
 The optimal decision threshold for the predicted probabilities is calculated using
 the $f_\beta$ score. Here, $\beta=0.1$ is used, meaning that much more importance
-is placed on the precision of the Classification rather then the accuracy.
+is placed on the precision of the classification rather then the accuracy.
 The $f_\beta$ score is computed for each possible threshold $\tau_c$, then
 the maximum value is determined and consequently the best value for $\tau_c$.
 The score and its maximum are displayed in \autoref{fig:NaiveBayes_threshold}.
@@ -214,5 +217,5 @@ A comparison of the ROC curves of each classifier is shown in \autoref{fig:roc_c
 
 While the Random Forest and Neural Network dont show a large difference here, the
 lower performance of the Naive Bayes approach is clearly visible.
-Consequently, the Random Forest is applied to the test sample, on which it
+Consequently, the Random Forest is applied to the test sample, in which it
 identifies $1897$ events as signal.

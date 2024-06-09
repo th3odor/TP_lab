@@ -1,2 +1,29 @@
 \section{Discussion}
 \label{sec:Discussion}
+
+The quality of the feature selection with the mRMR method is difficult
+to evaluate on its own, however the distributions in \autoref{fig:features}
+show a good seperation between signal and background. This is a good indication
+that the algorithm has succesfully selected features that contain the highest
+possible information about wether an event contains a signal component or only
+background. \\
+As already discussed in the analysis of the Naive Bayes classifier, this
+model does not perform good enough, based on its limited capacity and low
+complexity. Requiring a high precision with the $f_\beta$ score leads to a very
+large amount of signal events beeing mistaken for background. \\
+In contrast, the Random Forest performs much better. The determination of
+the optimal amount of input features is stable and shows a clear maximum
+number of attributes. This helps to ensure that the model is not overtrained
+and can make use of all the information provided by the $60$ different input
+features. The $f_\beta$ score gives a clear maximum to optimize the cut on the
+predicted probabilities. \\
+Compared to the Random Forest, the Neural Network performs slightly worse.
+This already becomes apparent when determining the best input features, as more
+fluctuations are already visible here. The optimal cut from the $f_\beta$ score
+lies in a region very close to one, making it more sensitive to random changes in the
+network every time it is trained. Changing the architecture of the network could
+help improving its performance, however adding more hidden layers or neurons greatly
+increases the computational time. Since the training process of the Neural Network
+already takes much longer than the Random Forest, it follows that the Random Forest
+model works better for this application, which is why it is chosen in the end.
+
