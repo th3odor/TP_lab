@@ -23,7 +23,7 @@ Lastly, the data is rescaled by removing the mean and scaling to unit variance.
 \subsection{Attribute selection}
 \label{sec:att_selection}
 
-Before the multivariate section can be performed, a selection of attributes is needed that the classifier
+Before the multivariate section can be performed, a selection of suitable attributes is needed, which the classifier
 can use. The goal is to choose attributes which contain the most information about wether an event
 is signal or background. Using all available attributes is avoided as this can lead to overtraining and
 increases computational time.
@@ -70,9 +70,9 @@ cannot make use of the additional information provided when more features are gi
 This is why only the five best attributes are used to train this classifier.
 To validate the classifiers performance, a k-folding algorithm is used with five splits.
 This means that the data is split in five parts, the classifier is then trained on four parts and tested using
-the remaining part. In this fashion, five classifiers are each trained and tested on different subsets,
-if the model is working good the results should be similar for all choices of subsets.
-The scores of the Naive Bayes classifier are determined to be
+the remaining part. In this fashion, five classifiers are each trained and tested on different subsets.
+If the model is working good the results should be similar for all choices of subsets.
+The scores of the Naive Bayes classifier are determined to be %vllt ein halber satz zur abweichung
 \begin{align*}
   \text{Accuracy} &= 0.8432\pm0.0029 \,, \\
   \text{Precision} &= 0.9074\pm0.0019 \,, \\
