@@ -78,6 +78,7 @@ The scores of the Naive Bayes classifier are determined to be
   \text{Precision} &= 0.9074\pm0.0019 \,, \\
   \text{ROC Score} &= 0.9278\pm0.0013 \,.
 \end{align*}
+The errors are very small, meaning the model performs independently of the specific subset of data it was trained on.
 The optimal decision threshold for the predicted probabilities is calculated using
 the $f_\beta$ score. Here, $\beta=0.1$ is used, meaning that much more importance
 is placed on the precision of the classification rather then the accuracy.
@@ -129,6 +130,7 @@ with five splits, the results are
   \text{ROC Score} &= 0.99566\pm0.00027 \,.
 \end{align*}
 
+The scores are highly improved compared with the Naive Bayes approach, the cross validation erros are again very low.
 The optimal decision threshold is determined in the same way as before, \autoref{fig:RandomForest_threshold}
 shows the $f_\beta$ score and its maximum.
 
@@ -174,7 +176,7 @@ The results from using k-folding become
   \text{Precision} &= 0.972\pm0.004 \,, \\
   \text{ROC Score} &= 0.99603\pm0.00034 \,.
 \end{align*}
-
+The scores are very similar to the results of the Random Forest.
 \autoref{fig:NeuralNetwork_threshold} shows the $f_\beta$ score and its maximum.
 
 \begin{figure}[H]

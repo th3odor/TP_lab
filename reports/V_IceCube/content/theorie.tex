@@ -1,17 +1,18 @@
 \section{Goals}
 The goal of this analysis is the classification of neutrino measurements in data from the IceCube experiment. 
-This is achieved using the application of the minimum redundancy, maximum relevance (mRMR) selection to determine the best features and the comparison of three different machine learning algorithms for the classification.
+First, the minimum redundancy, maximum relevance (mRMR) selection is used to determine the best features.
+This is directly followed by the application and comparison of three different machine learning algorithms for the classification.
 
 
 \section{Theory}
 \label{sec:Theory}
-In order to understand the performed analysis it is important to investigate the origin of the measured particles and the applied algorithms. 
+Before starting the data analysis, it is important to investigate the origin of the measured particles and understand the applied algorithms. 
 
 \subsection{Cosmic Rays}
 So-called "Cosmic Rays" consist of highly energetic particles, for examples protons, electrons, different nuclei as well as neutrinos. 
-The study on these particles have been a point of interest for many centuries but the therm cosmic "Cosmic rays" was established in the early 20-th century. 
+The study of these particles has been a point of interest for many centuries but the therm cosmic "Cosmic rays" was established in the early 20-th century. 
 Incoming cosmic rays usually interact with the matter in the earths atmosphere creating particle showers. 
-These incoming particles originate from a variety of different sources in the cosmos ranging form active galactic nuclei or supernovae.
+These incoming particles originate from a variety of different sources in the cosmos, some examples are active galactic nuclei or supernovae.
 Their energy spectrum is described by
 \begin{equation*}
 	\frac{\mathrm{d}\Phi}{\mathrm{d}E} = \Phi_0 E^\gamma,
@@ -21,15 +22,16 @@ The energy carried by these particles can range up to $10^{20}\,\unit{\eV}$.
 
 
 \subsection{Atmospheric and astrophysical leptons}
-Through the showers launched by cosmic rays a range of different particles is created. 
-High energetic muons and neutrinos for example originate mostly from the decay of lighter mesons in atmospheric particle showers. 
-In the IceCube experiment these are refered to as \textit{conventional}. 
+The showers caused by cosmic rays create a range of different particles. 
+High energetic muons and neutrinos originate mostly from the decay of lighter mesons in atmospheric particle showers. 
+In the IceCube experiment these are refered to as \textit{conventional} and form a large background in the data.
 As the lighter mesons loose some of their energy the resulting energy spectrum for the muons 
-end neutrinos is lower and follows a $E^{\gamma-1}$ proportionality. 
-If the muons and neutrinos originate from heavier hadrons, 
-(e.g $\Lambda$-baryons or $D$-mesons) then their energy spectrum will much more resemble those from astrophysical ones. 
+and neutrinos is lower and follows a $E^{\gamma-1}$ proportionality. 
+If the muons and neutrinos originate from heavier hadrons 
+(e.g $\Lambda$-baryons or $D$-mesons), their energy spectrum will much more resemble those from astrophysical ones. 
 This is caused by the short lifetime of the heavier hadrons, leaving them less time to loose energy.
-When an astrophysical particle is detected at the IceCube experiment, it is called \textit{prompt}.
+When an astrophysical particle is detected at the IceCube experiment, it is called \textit{prompt} and is
+usually the signal that has to be extracted from the large background.
 
 \subsection{mRMR Selection}
 \label{sec:mRmR}
@@ -37,7 +39,7 @@ The mRMR selection algorithm is implemented using python library \texttt{mrmr-se
 \begin{equation*}
 	I(x,y) = \int p(x,y)\log\left(\frac{p(x,y)}{p(x)p(y)}\right)\mathrm{d}x\mathrm{d}y,
 \end{equation*}
-where $p(x),p(y),p(x,y)$ are the probability density of the different features. It is a feature selection algorithm independent of the type of learner applied.
+where $p(x),p(y),p(x,y)$ are the probability densities of the different features. It is a feature selection algorithm independent of the type of learner applied.
 
 \subsection{Naive Bayes Classifier}
 The Naive Bayes Classifier uses a Bayesian approach in order to classify candidates as signal $A$ or background $\bar{A}$. It assumes the probability $p(B|A)$ to be background/signal with the given feature $V$ is only dependent on $B$ (naive). The classifier calculates
@@ -76,7 +78,7 @@ against the False Positive Rate
 \begin{equation*}
 	\mathrm{TPR} = \frac{\mathrm{FP}}{\mathrm{FP + TN}}
 \end{equation*}
-for different cut values $\tau_c$ on the prediction of the classifier. The metric containing quality of the classification is the area under the aforementioned curve. A value of 0.5 results from random guessing whereas a value of 1 is ideal.
+for different cut values $\tau_c$ on the prediction of the classifier. A metric for the quality of the classification is the area under the aforementioned curve. A value of 0.5 results from random guessing whereas a value of 1 is ideal.
 
 
 
