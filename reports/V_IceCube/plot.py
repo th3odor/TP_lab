@@ -150,11 +150,12 @@ def num_features(model, model_name):
 def model_eval(model, model_name, n_feautures, beta, tau_range, tau_plot):
     X = df[feautures_class[:n_feautures]] ## take n feautures only
     kfold = KFold(n_splits=5, shuffle=True) ## kfolding with shuffling
-    cv_result = cross_validate(model, X, label, scoring=["accuracy", "precision", "roc_auc"], cv = kfold, return_estimator=True)
+    cv_result = cross_validate(model, X, label, scoring=["accuracy", "precision", "recall", "roc_auc"], cv = kfold, return_estimator=True)
     print("")
     print(f"{model_name} Cross validation result:")
     print(f"Accuracy: {un.ufloat(np.mean(cv_result['test_accuracy']),np.std(cv_result['test_accuracy']))}")
     print(f"Precision: {un.ufloat(np.mean(cv_result['test_precision']),np.std(cv_result['test_precision']))}")
+    print(f"Recall: {un.ufloat(np.mean(cv_result['test_recall']),np.std(cv_result['test_recall']))}")
     print(f"ROC: {un.ufloat(np.mean(cv_result['test_roc_auc']),np.std(cv_result['test_roc_auc']))}")
     print("")
 

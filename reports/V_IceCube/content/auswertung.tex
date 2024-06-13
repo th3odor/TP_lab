@@ -14,7 +14,7 @@ used during the training process, as they are not present in actual data.
 All attributes with a name containing the key words \texttt{Weight}, \texttt{MC}, \texttt{Corsika}, or
 \texttt{I3EventHeader} are removed from the datasets.
 The training data is already labeled with $0$ for background and $1$ for signal. These labels are removed and 
-stored, as they should only be used for validation purposes. Some entries contain \texttt{Nans} or
+stored, as they should only be used for classifier training and validation purposes. Some entries contain \texttt{Nans} or
 \texttt{Infs}, which have to be removed. As a first step, all attributes where more than \qty{10}{\percent}
 of entries are \texttt{Nans} or \texttt{Infs} are removed. The remaining invalid values are adressed by
 deleting all events where any attribute is \texttt{Nan} or \texttt{Inf}.
@@ -26,7 +26,8 @@ Lastly, the data is rescaled by removing the mean and scaling to unit variance.
 Before the multivariate section can be performed, a selection of suitable attributes is needed, which the classifier
 can use. The goal is to choose attributes which contain the most information about wether an event
 is signal or background. Using all available attributes is avoided as this can lead to overtraining and
-increases computational time.
+increases computational time. Additionally, too many features result in a large parameter space, this can lead
+to problems later on depending on the type of classifier used.
 The selection is performed using the mRMR method described in \autoref{sec:mRmR}. Using the package
 \texttt{mrmr\_selection} \cite{mrmr}, the $100$ best features are determined in ascending order.
 In \autoref{fig:features}, the distributions of the four best features for signal and background events
@@ -74,10 +75,12 @@ the remaining part. In this fashion, five classifiers are each trained and teste
 If the model is working good the results should be similar for all choices of subsets.
 The scores of the Naive Bayes classifier are determined to be
 \begin{align*}
-  \text{Accuracy} &= 0.8432\pm0.0029 \,, \\
-  \text{Precision} &= 0.9074\pm0.0019 \,, \\
-  \text{ROC Score} &= 0.9278\pm0.0013 \,.
+  \text{Accuracy} &= 0.8432\pm0.0019 \,, \\
+  \text{Precision} &= 0.907\pm0.004 \,, \\
+  \text{Recall} &= 0.7660\pm0.0022 \,, \\
+  \text{ROC Score} &= 0.9278\pm0.0017 \,.
 \end{align*}
+
 The errors are very small, meaning the model performs independently of the specific subset of data it was trained on.
 The optimal decision threshold for the predicted probabilities is calculated using
 the $f_\beta$ score. Here, $\beta=0.1$ is used, meaning that much more importance
@@ -125,9 +128,10 @@ As before, the performance of the Random Forest is determined via k-folding the 
 with five splits, the results are
 
 \begin{align*}
-  \text{Accuracy} &= 0.9731\pm0.0014 \,, \\
-  \text{Precision} &= 0.9873\pm0.0030 \,, \\
-  \text{ROC Score} &= 0.99566\pm0.00027 \,.
+  \text{Accuracy} &= 0.9729\pm0.0023 \,, \\
+  \text{Precision} &= 0.9859\pm0.0014 \,, \\
+  \text{Recall} &= 0.960\pm0.004 \,, \\
+  \text{ROC Score} &= 0.9956\pm0.0006 \,.
 \end{align*}
 
 The scores are highly improved compared with the Naive Bayes approach, the cross validation erros are again very low.
@@ -172,10 +176,12 @@ As with the Random Forest, no improvement can be seen after using more than
 $60$ features, so again $60$ is chosen as the number of features here.
 The results from using k-folding become
 \begin{align*}
-  \text{Accuracy} &= 0.9711\pm0.0015 \,, \\
-  \text{Precision} &= 0.972\pm0.004 \,, \\
-  \text{ROC Score} &= 0.99603\pm0.00034 \,.
+  \text{Accuracy} &= 0.9711\pm0.0008 \,, \\
+  \text{Precision} &= 0.971\pm0.005 \,, \\
+  \text{Recall} &= 0.972\pm0.005 \,, \\
+  \text{ROC Score} &= 0.9957\pm0.0006 \,.
 \end{align*}
+
 The scores are very similar to the results of the Random Forest.
 \autoref{fig:NeuralNetwork_threshold} shows the $f_\beta$ score and its maximum.
 
