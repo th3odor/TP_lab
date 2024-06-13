@@ -1,0 +1,111 @@
+% This example is meant to be compiled with lualatex or xelatex
+% The theme itself also supports pdflatex
+\PassOptionsToPackage{unicode}{hyperref}
+\documentclass[aspectratio=1610, 9pt]{beamer}
+
+% Load packages you need here
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguages{german}
+
+\usepackage{csquotes}
+
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{emoji}
+\usepackage{tikz}
+\usepackage[compat=1.1.0]{tikz-feynman}
+\usepackage{appendixnumberbeamer}
+\usepackage{color}
+\usepackage[most]{tcolorbox}
+\tcbset{colback=yellow!10!white, colframe=red!50!black, 
+        highlight math style= {enhanced, %<-- needed for the ’remember’ options
+            colframe=red,colback=red!10!white,boxsep=0pt}
+        }
+\usepackage{empheq}
+\newcommand*\widefbox[1]{\fcolorbox{tugreen}{white}{\hspace{2em}#1\hspace{2em}}}
+
+\usepackage[
+  locale=UK,                   % UK Einstellungen
+  separate-uncertainty=true,   % immer Unsicherheit mit \pm
+  per-mode=symbol-or-fraction, % / in inline math, fraction in display math
+]{siunitx}
+
+\usepackage{graphicx, caption, subcaption}
+
+% load the theme after all packages
+
+\usetheme[
+  showtotalframes, % show total number of frames in the footline
+  % dark, % optional dark theme, uncomment to use
+]{tudo}
+
+% Put settings here, like
+\unimathsetup{
+  math-style=ISO,
+  bold-style=ISO,
+  nabla=upright,
+  partial=upright,
+  mathrm=sym,
+}
+
+\usepackage[
+  % style=numeric,
+  % style=authoryear-ibid,
+  % style=verbose,
+  doi=false,
+  style=phys,
+  % sorting=none,
+  backend=biber,
+  autolang=hyphen,
+  articletitle=false,
+  chaptertitle=false,
+  biblabel=brackets,
+  eprint=false,
+  pageranges=false,
+  doi=false,
+  % useauthor=false,
+]{biblatex}
+% Quellendatenbank
+\addbibresource{lit.bib}
+
+\title{BSM seminar talk: Axion models and EFT}
+\author{Can Toraman \& Theodor Zies}
+\date{04.07.2024}
+\institute[Department of physics]{Supervision: Prof. Dr. Gudrun Hiller}
+\titlegraphic{\includegraphics[width=0.8\textwidth]{logos/Axion.jpeg}}
+
+\captionsetup[figure]{labelformat=empty}
+\captionsetup[table]{labelformat=empty}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Standard Model of Elementary Particles}
+  \begin{columns}
+    \centering
+    \column{.5\textwidth}
+    \begin{itemize}
+      \item Standard Model of Particle Physics (SM) incomplete \\ (e.g. Dark Matter, Dark Energy, Neutrino masses)
+      \item Search for New Physics (NP)
+      \item Possible new particle candidate: Axions
+      \item Axion basics explained in previous talk
+    \end{itemize}
+    \column{.5\textwidth}
+    \begin{figure}
+    \includegraphics[height=6.5cm]{images/SM.pdf}
+    \caption{\footnotesize \href{https://commons.wikimedia.org/wiki/File:Standard_Model_of_Elementary_Particles.svg}{{[commons.wikimedia.org]}}}
+    \end{figure}
+  \end{columns} 
+
+\end{frame}
+
+\end{document}
