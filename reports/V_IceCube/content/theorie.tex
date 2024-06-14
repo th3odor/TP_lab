@@ -1,5 +1,5 @@
 \section{Goals}
-The goal of this analysis is the classification of neutrino measurements in data from the IceCube experiment. 
+The goal of this analysis is the classification of neutrino measurements in data from Monte Carlo the IceCube experiment. 
 First, the minimum redundancy, maximum relevance (mRMR) selection is used to determine the best features.
 This is directly followed by the application and comparison of three different machine learning algorithms for the classification.
 
@@ -24,14 +24,15 @@ The energy carried by these particles can range up to $10^{20}\,\unit{\eV}$.
 \subsection{Atmospheric and astrophysical leptons}
 The showers caused by cosmic rays create a range of different particles. 
 High energetic muons and neutrinos originate mostly from the decay of lighter mesons in atmospheric particle showers. 
-In the IceCube experiment these are refered to as \textit{conventional} and form a large background in the data.
+In the IceCube experiment these are referred to as \textit{conventional} and form a large background in the data.
 As the lighter mesons loose some of their energy the resulting energy spectrum for the muons 
-and neutrinos is lower and follows a $E^{\gamma-1}$ proportionality. 
+and neutrinos is lower and follows a $E^{-3.7}$ proportionality. 
 If the muons and neutrinos originate from heavier hadrons 
 (e.g $\Lambda$-baryons or $D$-mesons), their energy spectrum will much more resemble those from astrophysical ones. 
 This is caused by the short lifetime of the heavier hadrons, leaving them less time to loose energy.
-When an astrophysical particle is detected at the IceCube experiment, it is called \textit{prompt} and is
-usually the signal that has to be extracted from the large background.
+When a particle originating from the decay of a short lived particle is detected it is called \textit{prompt}. From the prompt particles the signal are those which originate form the decay of a neutrino.
+%When an astrophysical particle is detected at the IceCube experiment, it is called \textit{prompt} and is
+%usually the signal that has to be extracted from the large background.
 
 \subsection{mRMR Selection}
 \label{sec:mRmR}
@@ -49,26 +50,31 @@ The Naive Bayes Classifier uses a Bayesian approach in order to classify candida
 which is $> 1$ for a signal and $< 1$ for a background prediction.
 
 \subsection{Random Forest Classifier}
-A random forest classifier uses $k$ binary decision trees, which try to determine ideal cuts on the given features by minimizing a loss function. Each tree is trained on a random subset of the data in order to avoid over training. The determined result of each tree is then averaged or the majority voting is used depending on the implementation. 
+A random forest classifier uses $k$ binary decision trees, which try to determine ideal cuts on the given features by minimizing a gini-impurity function
+\begin{equation}
+	\mathrm{Gini}(p_i) = 1 - \sum_{i=1}^{k}{p_i}^1,
+\end{equation}
+where $p_i$ is the probability of a candidate belonging to a class $i$.
+Each tree is trained on a random subset of the data in order to avoid over training. 
+The determined result of each tree is then averaged or the majority voting is used depending on the implementation. 
 
 \subsection{Multi-Layer Perceptron Classifier}
-The Multi-Layer Perceptron Classifier (MLPClassifier) is a classic neural network with LBFGS loss function. It is trained using labeled data. As the MLPClassifier usually is implemented with multiple hidden layers it allows classification of non linear problems.
+The Multi-Layer Perceptron Classifier (MLPClassifier) is a classic neural network with Limited-memory Broyden–Fletcher–Goldfarb–Shanno algorithm (LBFGS) loss function \cite{Lossfueicecube}. It is trained using labeled data. As the MLPClassifier usually is implemented with multiple hidden layers it allows classification of non linear problems.
 
 \subsection{Evaluation of the Models}
-All the above mentioned models are evaluated using a range of metrics. During the classification, a subsample of the training data is used to check the models for over training. This procedure is called cross validation and it can contain for example crosschecks of the loss function for training and validation data. After the training the accuracy $a$ and the precision $p$ are determined on a test data sample using 
+All the above mentioned models are evaluated using a range of metrics. During the classification, a subsample of the training data is used to check the models for overtraining. This procedure is further described in \autoref{Hier label}.%This procedure is called cross validation and it can contain for example crosschecks of the loss function for training and validation data. 
+After the training the accuracy $a$ and the precision $p$ are determined on a test data sample using 
 \begin{align*}
-	a =& \frac{\mathrm{TP + TN}}{\mathrm{TP + TN + FP + FN}},\ \mathrm{and}\\
-	p=&  \frac{\mathrm{TP}}{\mathrm{TP + FP}},
+	a =& \frac{\mathrm{TP + TN}}{\mathrm{TP + TN + FP + FN}},\\
+	p =&  \frac{\mathrm{TP}}{\mathrm{TP + FP}},\\
+	r =& \frac{\mathrm{TP}}{\mathrm{TP + FN}},
 \end{align*}
-where TP + TN + FP + FN are correctly classified signal (TP) and background (TN) and respectively falsely classified signal (FP) and background (FN). Ideally both values are close to 1. 
+where TP, TN, FP and FN are the counts of correctly classified signal (TP) and background (TN) and respectively falsely classified signal (FP) and background (FN). Ideally both values are close to 1. 
 Additionally , the $f_\beta$ score
 \begin{equation}
 	f_\beta = (1+\beta^2) \frac{p\cdot r}{\beta^2p+r}
 \end{equation}
-is calculated using the Recall
-\begin{equation*}
-r = \frac{\mathrm{TP}}{\mathrm{TP + FN}}.
-\end{equation*}
+is calculated using the Recall $r$.
 By using a $\beta \neq 1$, it is possible to give a higher importance to the precision $p$ or recall $r$, respectively.
 Lastly the Receiver Operating Characteristic (ROC) curve is determined by plotting the True Positive Rate 
 \begin{equation*}

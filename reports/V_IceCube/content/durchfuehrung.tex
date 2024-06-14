@@ -1,7 +1,7 @@
 \section{The IceCube Experiment}
 \label{sec:The_IceCube_Experiment}
 The IceCube experiment is located in the antarctic and consists of a huge array of photomultipliers inside the ice. 
-Its goal is the measurement of the origin and energy of astrophysical neutrinos.
+The primary goal is the measurement of the origin and energy of astrophysical neutrinos.
 The experiment is subdivided into the in-ice array, DeepCore, and IceTop. 
 This subdivision is due to the different densities of photomultipliers on each cable. 
 The DeepCore for example has the highest photomultiplier density and allows for measurements in a lower energy 
@@ -15,7 +15,7 @@ Since neutrinos only interact via the weak interaction, their direct measurement
 Therefore the IceCube experiment looks for particles created by weak interactions of neutrinos with water molecules. 
 These interactions are mediated through charged and neutral currents (CC and NC) as seen in \autoref{eq:CC} (CC) and \autoref{eq:NC} (NC).
 \begin{align}
-	\barparen{\nu_l} + A &= l^\mp + X \label{eq:CC}\\
+	\nu_l(\bar{\nu}_l) + A &= l^\mp + X \label{eq:CC}\\
 	\nu_l + A &= \nu_l + X \label{eq:NC}	
 \end{align}
 Leptons created in CC are detected using the shape of the signature they leave in the detector. 
@@ -33,4 +33,4 @@ The data samples used in this analysis are generated in Monte Carlo Simulations 
 \section{Tasks}
 \label{sec:Tasks}
 
-As already mentioned, the goal is the classification of events into ones consiting of either prompt (signal) or conventional (background) muons. This is archived using the mRMR selection algorithm and three learners. Their performance is determined and compared. The learners produce a probability for each candidate to be prompt or conventional, the cut $\tau_c$ on the probability value is determined by maximizing the $f_\beta$ score, with $\beta=0.1$. 
+As already mentioned, the goal is the classification of events into ones consisting of either signal or background muons. This is archived using the mRMR selection algorithm and three learners. Their performance is determined and compared. The learners produce a probability for each candidate to be prompt or conventional, the cut $\tau_c$ on the probability value is determined by maximizing the $f_\beta$ score, with $\beta=0.1$. 
