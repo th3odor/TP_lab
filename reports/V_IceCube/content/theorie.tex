@@ -62,7 +62,7 @@ The determined result of each tree is then averaged or the majority voting is us
 The Multi-Layer Perceptron Classifier (MLPClassifier) is a classic neural network with Limited-memory Broyden–Fletcher–Goldfarb–Shanno algorithm (LBFGS) loss function \cite{Lossfueicecube}. It is trained using labeled data. As the MLPClassifier usually is implemented with multiple hidden layers it allows classification of non linear problems.
 
 \subsection{Evaluation of the Models}
-All the above mentioned models are evaluated using a range of metrics. During the classification, a subsample of the training data is used to check the models for overtraining. This procedure is further described in \autoref{Hier label}.%This procedure is called cross validation and it can contain for example crosschecks of the loss function for training and validation data. 
+All the above mentioned models are evaluated using a range of metrics. During the classification, a subsample of the training data is used to check the models for overtraining. This procedure is further described in \autoref{sec:NaiveBayes}.%This procedure is called cross validation and it can contain for example crosschecks of the loss function for training and validation data. 
 After the training the accuracy $a$ and the precision $p$ are determined on a test data sample using 
 \begin{align*}
 	a =& \frac{\mathrm{TP + TN}}{\mathrm{TP + TN + FP + FN}},\\
