@@ -51,9 +51,9 @@ which is $> 1$ for a signal and $< 1$ for a background prediction.
 
 \subsection{Random Forest Classifier}
 A random forest classifier uses $k$ binary decision trees, which try to determine ideal cuts on the given features by minimizing a gini-impurity function
-\begin{equation}
+\begin{equation*}
 	\mathrm{Gini}(p_i) = 1 - \sum_{i=1}^{k}{p_i}^1,
-\end{equation}
+\end{equation*}
 where $p_i$ is the probability of a candidate belonging to a class $i$.
 Each tree is trained on a random subset of the data in order to avoid over training. 
 The determined result of each tree is then averaged or the majority voting is used depending on the implementation. 
