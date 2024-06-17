@@ -1,4 +1,76 @@
-\section{Theorie}
+\section{Objective}
+
+During the Big Bang, equal amounts of matter and antimatter should have been created. However, our universe almost exclusively contains regular matter.
+This so called matter-antimatter problem remains unsolved until today. It can partially be explained by the violation of
+the matter-antimatter (CP) symmetry in weak decays. This analysis uses data from weak $B$ meson decays recorded at the LHCb experiment to quantify
+the CP asymmetry.
+
+\section{Theory}
 \label{sec:Theorie}
-test
-\cite{sample}
+
+To understand how weak $B$ meson decays at LHCb can be used to study CP violation, it is necesarry to explain the origin of CP violation in the standard model (SM)
+of particle physics first. The following section gives a short overview about how CP violation was discovered and the way it is parameterized in the SM.
+
+\subsection{The CKM matrix and CP violation}
+
+In 1973, Kobayashi and Maskawa \cite{CKM_paper} completed the quark sector of the SM by introducing a third generation of quarks, the top ($t$) and bottom ($b$) quark.
+Thus in total, three up-type quarks ($u$, $c$, $t$) and three down-type quarks ($d$, $s$, $b$) exist in the SM. During weak processes, the quarks couple to the
+$W$ and $Z$ bosons in their weak eigenbasis. The weak eigenstates result from mixing the physical eigenstates of the quarks, this mixing is described
+by the CKM matrix:
+\begin{align*}
+    \begin{pmatrix}
+        d' \\
+        s' \\
+        b' \\
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        V_{\text{ud}} & V_{\text{us}} & V_{\text{ub}} \\
+        V_{\text{cd}} & V_{\text{cs}} & V_{\text{cb}} \\
+        V_{\text{td}} & V_{\text{ts}} & V_{\text{tb}} \\
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+        d \\
+        s \\
+        b \\
+    \end{pmatrix}   . 
+\end{align*}
+Another way of interpreting this matrix is that each element quantifies how likely it is for a transition from one specific quark type to another to occur.
+The CKM matrix is a complex and unitary $3 \times 3$ matrix, which is why it has four free parameters. Three of these parameters are the previously
+mentioned quark mixing angles, however the fourth parameter is a complex phase $\delta$. This phase describes the CP violation and is the main reason why the third
+generation of quarks was introduced. The CP is a short form for the charge (C) and parity (P) symmetry, which describes the fact that an antiparticle (regular particle
+with opposite charge and parity) is expected to behave exactly the same as its regular particle counterpart. In 1964, violation of this CP-symmetry in weak Kaon decays was
+observed and could not be described at first. The violation could finally explained through the implementation of the previously mentioned CP violation phase in 1973.
+
+The CKM matrix elements have been experimentally measured and show a clear hierachy in respect to the different generations. A possible way of parameterizing the matrix
+is the so-called Wolfenstein parameterization (at $\lambda^3$ order):
+\begin{align*}
+    V_{\text{CKM}} & \simeq
+    \begin{pmatrix}
+        1-\frac{1}{2}\lambda^2 & \lambda & A\lambda^3(\rho-\symup{i}\eta) \\
+        -\lambda & 1-\frac{1}{2}\lambda^2 & A\lambda^2 \\
+        A\lambda^3(1-\rho-\symup{i}\eta) & -A\lambda^2 & 1 \\
+    \end{pmatrix}.
+\end{align*}
+The complex CP violating phase is represented in the parameters $\rho$ and $\eta$ in this case. It is important to note that these parameters only appear in the matrix elements
+$V_{\text{ub}}$ and $V_{\text{td}}$ which will become important later.
+
+\subsection{CP violation in weak decays of B mesons}
+
+This analysis aims to study CP violation in weak $B$-meson decays. More specifically, decays of the $B^+$ meson and its CP counterpart $B^-$ of the following form
+are considered:
+\begin{align*}
+    B^+ &\rightarrow h^+ h^+ h^- \\
+    B^- &\rightarrow h^- h^- h^+
+\end{align*}
+Without CP violation, one would expect to observe the same number of $B^+$ decays ($N^+$) as $B^-$ decays ($N^-$). However, during the weak decay of the
+$B$ meson consisting of a $b$ and $u$ quark, quark transitions of the form $b \rightarrow u$ can occur. The corresponding CKM matrix element $V_{\text{ub}}$
+is a complex number, as explained in the previous section. Consequently, the matrix element differs if a different CP variant of the decay is considered, due
+to the complex conjugation involved. In practice, the observed counts $N^+$ and $N^-$ will be different and a CP asymmetry can be defined \cite{LHCbCPV} as:
+\begin{equation*}
+    A_{\text{CP}} = \frac{N^+ - N^-}{N^- + N^+}.
+\end{equation*}
+During the $B$ decay, intermediate resonances contaning $c$ quarks can occur due to e.g. quark transitions of the form $b \rightarrow c$. Examples for this are
+different $D$-mesons or charmonium ($c \bar{c}$) resonances. These resonances have to be removed, because the CP violation is much smaller in this case. The reason for this is
+the CKM matrix element $V_{\text{cb}}$ that does not contain the CP violating parameters $\rho$ and $\eta$ (at the given order).
