@@ -1,4 +1,60 @@
 \section{The LHCb detector}
 \label{sec:detector}
 
+The large hadron collider (LHC) located at CERN near Geneva is the largest particle accelerator to date.
+Opposing proton beams are collided at four different interaction points with center of mass energies up to \qty{13}{\tera\electronvolt}.
+Every interaction point houses one experiment, with each of them having a detector that is optimized for a different physics purpose.
+The four experiments are called ALICE, ATLAS, CMS and LHCb. The data used in this analysis is recorded at the LHCb detector.
+This detector is optimized for the study of $b$ physics and measurements of CP violation parameters, which is exactly the type of physics
+present in the $B$ meson decays that are analysed in this lab course.
+
+The LHCb detector is a single-arm forward spectrometer, this particular design was chosen because the particles studied at LHCb are mainly produced
+with a strong boost in the forward direction. The polar anglular coverage reaches from $15$ to $\qty{300}{\milli\radian}$ \cite{LHCbCPV}.
+A schematic view of the LHCb detector can be seen in \autoref{fig:lhcb} at the status during the first data-taking period.
+Here, the $z$-axis is along the beam direction, the negative $z$-region is referred to as upstream, while the positive $z$-region is called downstream.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{content/pictures/lhcb.png}
+	\caption{Cross-section of the LHCb detector, the following components are shown from left to right: The vertex locator (VELO),
+    the Cherenkov detectors (RICH1,RICH2), the tracking system (TT and T1,T2,T3) including the magnet,
+    the calorimeters (ECAL, HCAL) and the muon chambers (M1-M5).}
+	\label{fig:lhcb}
+\end{figure}
+
+The first component of the detector is the vertex locator (VELO), it is located directly at the interaction point. The VELO consits of multiple
+silicon strip detectors, meant to reconstruct the position of the proton-proton interaction, the primary vertex, and the decay location of the $b$ hadron (secondary vertex).
+The $B$ mesons typically have a flight path length of a few $\si{\milli\meter}$ to $\si{\centi\meter}$ and thus decay directly inside the VELO.
+The Ring Imaging Cherenkov (RICH) detectors 1 and 2 are used to calculate the velocity of transversing particles. This is archieved by measuring the diameter of light cones emitted by these 
+particles due to the Cherenkov effect. \\
+To obtain information about the particles momentum and charge, they are deflected by a dipole magnet with an integrated field strength of about \qty{4}{\tesla\meter}. Charged particles
+will then travel on a curved track. The tracking stations TT and T1-3 consit of large-area, four-layer silicon strip detectors as well as drift tubes. They measure the
+curved particle tracks and thus their radius can be determined. This allows to calculate the momentum of the particle, while its charge is given by the direction of the particles deflection
+in the magnet. Combining the information about particle momentum, velocity and charge allows for particle identification (PID).
+Further downstream lies the calorimeter system, it is divided into the electromagnetic (ECAL) and hadronic (HCAL) calorimeters.
+The main purpose of the calorimeters is the measurement of the energy deposited by photons and electrons in the ECAL and hadrons in the HCAL, respectively.
+Additionally the calorimeters also contribute to PID. The last main components are the five muon stations located at the end of the detector. Here, muons that traverse all other
+detector parts without much interaction can be measured. \\
+While the proton proton collisions occur at a rate of \qty{11}{\mega\hertz}, event storage is only possible with a rate of \qty{3}{\kilo\hertz} \cite{LHCbCPV}. To reduce the
+number of events, only physically interesting events are selected via a trigger system consisting of a hardware and software implementation.
+
 \section{Analysis strategy}
+
+The data to be analysed was collected at LHCb in 2011 with a center of mass energy of \qty{7}{\tera\electronvolt} at an integrated luminosity of $\approx \qty{500}{\pico\barn^{-1}}$.
+The data is split into 3.4 million events with upwards polarity of the dipole magnet and 5.1 million events with downwards polarity. Each event is of the type
+$B^\pm \rightarrow h^+ h^- h^\pm$. Additionally, simulations of the decay $B^\pm \rightarrow K^+ K^- K^\pm$ exist that only describe the decay into three Kaons.
+In contrast to the actual data, the simulations do not take intermediate resonances into account. The number of observables inside the dataset has already been reduced
+to a small set of essential variables. \\
+As a first step, the distribution of individual variables is checked in the simulated data. The invariant mass of the $B$ meson is calculated and histogrammed.
+In order to proceed in the same way with the actual data, the background that is present has to be reduced. A preselection is already applied, but additional requirements on PID have to be made.
+Signal candidates for the decay $B^\pm \rightarrow K^+ K^- K^\pm$ are selected, while the selection efficiency can be checked using the availabe simulation.
+After the selection, the invariant mass of the $B$ meson can again be calculated and compared with the previous result from the simulation.
+After a succesfull selection, the counts of signal candidates for the $B^+$ and $B^-$ decays are known and can be used to determine the CP asymmetry together with its uncertainty. \\
+A popular technique to visualize resonances in three-body decays are Dalitz plots. Here, two of the squared invariant masses from the combination of each two final state particles
+are usually plotted against each other. Any intermediate resonance will then be visible as a band in the plot, where the position and size of the band allow to infer on
+the mass and width of the resonance. In the case of this analysis, the Dalitz plots are used to locate and remove charm resonances due to the low CP violation in this region.\\
+Lastly, the Dalitz plots are used to determine local CP asymmetry. In this case, local refers to the fact that the asymmetry is calculated in a specific region of the phase space
+or a specic region in the Dalitz plot, respectively. In this manner, the areas with the most significant amount of CP asymmetry are determined and highlighted in the plot.
+
+
+
