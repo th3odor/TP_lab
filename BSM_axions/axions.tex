@@ -73,6 +73,18 @@
 % Quellendatenbank
 \addbibresource{lit.bib}
 
+\DeclareCiteCommand{\citecustom}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printnames{author}%
+   \setunit{\labelnamepunct}\newblock
+   \printfield{title}%
+   \setunit{\addcomma\space}%
+   \printfield{eprint}%
+   }
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
 \title{BSM seminar talk: Axion models and EFT}
 \author{Can Toraman \& Theodor Zies}
 \date{04.07.2024}
@@ -94,6 +106,7 @@
     \column{\textwidth}
     \begin{itemize}
       \item Table of contents
+      \item Talk based on \citecustom{paper}: "TASI Lectures on the Particle Physics and Astrophysics of Dark Matter"
     \end{itemize}
   \end{columns} 
 \end{frame}
@@ -173,7 +186,7 @@
     \begin{enumerate}
       \item Field theory
       \item Extra dimensions, string theory
-      \item Axion EFT
+      \item Axiverse from an EFT perspective
     \end{enumerate}
   \end{columns} 
 \end{frame}
@@ -321,7 +334,7 @@
   \end{columns} 
 \end{frame}
 
-\begin{frame}{EFT axions and ALPS}
+\begin{frame}{Axiverse from an EFT perspective}
   \begin{columns}
     \column{\textwidth}
     \begin{itemize}
