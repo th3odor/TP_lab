@@ -133,11 +133,14 @@
   \begin{columns}
     \column{.5\textwidth}
     \begin{itemize}
-      \item QCD allows for CP violation in SM
+      \item QCD allows for CP violation in SM\\
+      \begin{equation*}
+      	\mathcal{L} = \frac{g_s^2}{32 \pi^2} \bar{\theta} G^a_{\mu \nu} \tilde{G}^{a \mu \nu}
+      \end{equation*}
       \item Observe CP conservation in strong interaction $\rightarrow$ Strong CP problem
       \item Parameter $\bar{\theta}$ has to be fine tuned to be zero
       \item Physical meaning of $\bar{\theta}$: controls electric dipole moment of neutron
-      \item Axions provide a dynamical explanation for $\bar{\theta}=0$
+      \item Axions provide a dynamical explanation for lack of CP violation
       \item Dark matter is also explainable through axions
     \end{itemize}
     \column{.5\textwidth}
@@ -160,12 +163,13 @@
     \end{equation*}
     \begin{itemize}
       \item $f_a > 10^{9} \, \text{GeV}$ is the UV cut-off of the theory
-      \item The QCD axion potential $V(a)$ dynamically sets $\bar{\theta} \rightarrow 0$
+      \item The QCD axion potential $V(a)$ is minimal if $\bar{\theta} = - \frac{a}{f_a} $
     \end{itemize}
     \begin{equation*}
       V(a) = -F_{\pi}^2 m_{\pi}^2 \sqrt{1 - 4 \frac{m_u m_d}{(m_u + m_d)^2} \sin \left( \frac{1}{2} \left( \bar{\theta} + \frac{a}{f_a} \right) \right)^2 }
     \end{equation*}
     \begin{itemize}
+      \item CP violating term cancels
       \item Axions aquire a small mass:
     \end{itemize}
     \begin{equation*}
@@ -325,13 +329,103 @@
 \end{frame}
 
 
-\begin{frame}{Axions from string theory}
-  \begin{columns}
-    \column{\textwidth}
-    \begin{itemize}
-      \item Equations etc
-    \end{itemize}
-  \end{columns} 
+
+\begin{frame}
+	\frametitle{String Theory}
+	\begin{minipage}{0.55\textwidth}
+		\begin{itemize}
+			\item Why do we need String Theory?\\
+			$\rightarrow$ Quantum Gravity (QG) violates $PQ$-Symmetry
+			\item String Theory (ST) is a theory of QG
+			\item Some particles proposed in ST are good axion candidates\\
+			\item Requirements
+			\begin{itemize}
+				\item[(1)] Scalar particle
+				\item[(2)] High PQ Quality and spontaneous breaking
+				\item[(3)] QCD Contribution (Strong CP violation)\\
+				\begin{equation*}
+					\mathcal{L} = \frac{g_s^2}{32 \pi^2} \frac{a}{f_a} G^a_{\mu \nu} \tilde{G}^{a \mu \nu}
+				\end{equation*}
+				\item[(4)] Sufficiently low mass/coupling (Fit experimental bounds)
+				%				\item[(5)]
+			\end{itemize}			
+			
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.4\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=4.5cm]{images/string.pdf}
+			\caption{\href{https://en.wikipedia.org/wiki/File:Calabi_yau_formatted.svg}{[commons.wikimedia]}}
+		\end{figure}
+	\end{minipage}
+	\footnotetext[1]{\protect\footnotesize \fullcite{}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{String Theory - Overview}
+	%	\begin{minipage}{0.55\textwidth}
+		\begin{itemize}
+			\item Idea: Particles are points $\rightarrow$ Stings in higher dimension (open or closed)\\
+			$\rightarrow$ Different vibrational modes represent different particles
+			\item Multiple different theories under the therm ST
+			\item All expand the dimensionality to 10, 11 or 26\\
+			$\rightarrow$ Compactification used to create a 4D representation of these strings
+			\item Extra dimensions are finite (e.g. circles of radius $R$)
+			\item Different topology leads to different shapes $\rightarrow$ different physical consequences (generation, gauge groups etc.)
+			\item Compactification by e.g. integrating over the finite extra dimensions
+			
+		\end{itemize}
+		%	\end{minipage}
+	%	\hfill
+	%	\begin{minipage}{0.4\textwidth}
+		%		\begin{figure}
+			%			\centering
+			%			\includegraphics[width=4.5cm]{images/string.pdf}
+			%			\caption{\href{https://en.wikipedia.org/wiki/File:Calabi_yau_formatted.svg}{[commons.wikimedia]}}
+			%		\end{figure}
+		%	\end{minipage}
+	\footnotetext[1]{\protect\footnotesize \fullcite{}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Types of String Theories}
+		\begin{itemize}
+			\item Bosonic String Theory\\
+			$\rightarrow$ Most simple case (26 Dimensions)
+			\item Superstring Theory (10D, Supersymmetry $\rightarrow$ Each boson has a fermion partner)\\
+			\begin{itemize}
+				\item[Type I] Both closed and open strings
+				\item[Type IIA] Only closed and non-chiral(no distinguishing between LH or RH particles)
+				\item[Type IIA] Allso only closed but chiral
+			\end{itemize}
+		\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{5D Example}
+	\begin{minipage}{0.55\textwidth}
+		\begin{itemize}
+			\item 
+			\begin{equation}
+				\mathcal{L}_{4D} \supset \int d^4x \left( \frac{2\pi R}{2g_5^2} (\partial_\mu a)^2 + (2\pi R \kappa) a F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right),
+			\end{equation}
+			
+			\begin{equation}
+				= \int d^4x \left( \frac{1}{2} (\partial_\mu a)^2 + \frac{g_f^2}{32 \pi^2} \frac{a}{f_a} F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right),
+			\end{equation}
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.4\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=4.5cm]{images/string.pdf}
+			\caption{\href{https://en.wikipedia.org/wiki/File:Calabi_yau_formatted.svg}{[commons.wikimedia]}}
+		\end{figure}
+	\end{minipage}
+	\footnotetext[1]{\protect\footnotesize \fullcite{}}
 \end{frame}
 
 \begin{frame}{Axiverse from an EFT perspective}
