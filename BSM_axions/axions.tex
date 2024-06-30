@@ -84,6 +84,7 @@
    }
   {\multicitedelim}
   {\usebibmacro{postnote}}
+  \DeclareMathOperator{\Tr}{Tr}
 
 \title{BSM seminar talk: Axion models and EFT}
 \author{Can Toraman \& Theodor Zies}
@@ -344,7 +345,7 @@
 				\item[(2)] High PQ Quality and spontaneous breaking
 				\item[(3)] QCD Contribution (Strong CP violation)\\
 				\begin{equation*}
-					\mathcal{L} = \frac{g_s^2}{32 \pi^2} \frac{a}{f_a} G^a_{\mu \nu} \tilde{G}^{a \mu \nu}
+					\mathcal{L} \supset \frac{g_s^2}{32 \pi^2} \frac{a}{f_a} G^a_{\mu \nu} \tilde{G}^{a \mu \nu}
 				\end{equation*}
 				\item[(4)] Sufficiently low mass/coupling (Fit experimental bounds)
 				%				\item[(5)]
@@ -360,7 +361,7 @@
 			\caption{\href{https://en.wikipedia.org/wiki/File:Calabi_yau_formatted.svg}{[commons.wikimedia]}}
 		\end{figure}
 	\end{minipage}
-	\footnotetext[1]{\protect\footnotesize \fullcite{}}
+%	\footnotetext[1]{\protect\footnotesize \fullcite{}}
 \end{frame}
 
 \begin{frame}
@@ -369,12 +370,12 @@
 		\begin{itemize}
 			\item Idea: Particles are points $\rightarrow$ Stings in higher dimension (open or closed)\\
 			$\rightarrow$ Different vibrational modes represent different particles
-			\item Multiple different theories under the therm ST
+			\item Multiple different theories under the term ST
 			\item All expand the dimensionality to 10, 11 or 26\\
 			$\rightarrow$ Compactification used to create a 4D representation of these strings
-			\item Extra dimensions are finite (e.g. circles of radius $R$)
+			\item Extra dimensions are infinite
 			\item Different topology leads to different shapes $\rightarrow$ different physical consequences (generation, gauge groups etc.)
-			\item Compactification by e.g. integrating over the finite extra dimensions
+			\item Compactification $\rightarrow$ curls the infinite dimensions up into a finite geometrical shape (e.g. a circle) %by e.g. integrating over the finite extra dimensions
 			
 		\end{itemize}
 		%	\end{minipage}
@@ -386,46 +387,80 @@
 			%			\caption{\href{https://en.wikipedia.org/wiki/File:Calabi_yau_formatted.svg}{[commons.wikimedia]}}
 			%		\end{figure}
 		%	\end{minipage}
-	\footnotetext[1]{\protect\footnotesize \fullcite{}}
+%	\footnotetext[1]{\protect\footnotesize \fullcite{}}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Types of String Theories}
 		\begin{itemize}
 			\item Bosonic String Theory\\
-			$\rightarrow$ Most simple case (26 Dimensions)
-			\item Superstring Theory (10D, Supersymmetry $\rightarrow$ Each boson has a fermion partner)\\
+			$\rightarrow$ Most simple case (26 Dimensions) 
+			\item Superstring Theory (10 Dimensions, Supersymmetry $\rightarrow$ Each boson has a fermion partner)\\
 			\begin{itemize}
-				\item[Type I] Both closed and open strings
-				\item[Type IIA] Only closed and non-chiral(no distinguishing between LH or RH particles)
-				\item[Type IIA] Allso only closed but chiral
+				\item[\ ]{\color{tugreen!60!black}Type I:}\ \ \ \ Both closed and open strings
+				\item[\ ]{\color{tugreen!60!black}Type IIA:} Only closed and non-chiral (no distinguishing between LH or RH particles)
+				\item[\ ]{\color{tugreen!60!black}Type IIB:} Also only closed but chiral $\rightarrow$ Good axion like particles
+				\item[\ ]{\color{tugreen!60!black}And others}
 			\end{itemize}
+			\item M-Theory (11 Dimensions)
+			$\rightarrow$ Attempt to unify all Superstring Theories
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{5D Example}
+	
+	\begin{itemize}
+		\item Coordinates: $(x_0, x_1, x_2, x_3, y)$, with y compactified on a circle (Radius $R$) 
+		\item The fifth dimension y is modded out under a symmetry $Z_2$ (objects transformed in this dimensions remain even)
+		\item We introduce a $U(1)$ gauge field $B_M$ with $M = 0,1,2,3,5$, which transform under $Z_2$ like:
+		\begin{equation*}
+			B_{\mu}(-y) = -B_{\mu}(y)\hspace{1 cm}\text{and}\hspace{1cm}  B_5(-y) = B_5(y)
+		\end{equation*}	
+		\item One additional gauge field $F_M$ is introduced (Field strength tensor $F_{MN}$)
+		\item This leads to the following Lagrangian terms
+		\begin{equation*}
+			\mathcal{L}_{5D} \supset \int d^4x \int_0^{2\pi R} dy \left( \frac{1}{4 g_5^2} B_{MN} B^{MN} + \kappa \epsilon^{MNPQR} B_M \Tr(F_{NP} F_{QR}) \right)
+		\end{equation*}
+		$g_5$, $\kappa$ coupling constants, $\epsilon^{MNPQR}$ totally antisymmetric tensor
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{5D Example}
+		\begin{itemize}
+			\item Introduction of the axion as $B_M$ zero-modes (Massless compactification of the Field)\\
+			$\rightarrow$ Axion field is defined as: 
+			\begin{equation*}
+				{\Large e^{2\pi R i a} \equiv e^{i\int_{0}^{2\pi R}B_5(x_\mu, y)dy}}
+			\end{equation*}
+			We assume for simplicity $\int_{0}^{2\pi R}B_5(x_\mu, y)dy = 2\pi RB_5(x_\mu, y)$
+			\item Plugging it into:
+			\begin{equation*}
+				\mathcal{L}_{4D} \supset \int d^4x \int_0^{2\pi R} dy \left( \frac{1}{4 g_5^2} \underbrace{B_{MN} B^{MN}}_{\rightarrow\ B_{\mu\nu}B^{\mu\nu} + 2(\partial_\mu a)^2} + \kappa \underbrace{\epsilon^{MNPQR} B_M \Tr(F_{NP} F_{QR})}_{\rightarrow aF_{\mu\nu}^a \tilde{F}^{a\mu\nu}} \right)
+			\end{equation*}
+			\item After integrating:
+			\begin{equation*}
+				\mathcal{L}_{4D} \supset \int d^4x \left( \frac{2\pi R}{2g_5^2} (\partial_\mu a)^2 + (2\pi R \kappa) a F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right)
+			\end{equation*}
 		\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{5D Example}
-	\begin{minipage}{0.55\textwidth}
-		\begin{itemize}
-			\item 
-			\begin{equation}
-				\mathcal{L}_{4D} \supset \int d^4x \left( \frac{2\pi R}{2g_5^2} (\partial_\mu a)^2 + (2\pi R \kappa) a F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right),
-			\end{equation}
-			
-			\begin{equation}
-				= \int d^4x \left( \frac{1}{2} (\partial_\mu a)^2 + \frac{g_f^2}{32 \pi^2} \frac{a}{f_a} F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right),
-			\end{equation}
-		\end{itemize}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.4\textwidth}
-		\begin{figure}
-			\centering
-			\includegraphics[width=4.5cm]{images/string.pdf}
-			\caption{\href{https://en.wikipedia.org/wiki/File:Calabi_yau_formatted.svg}{[commons.wikimedia]}}
-		\end{figure}
-	\end{minipage}
-	\footnotetext[1]{\protect\footnotesize \fullcite{}}
+	\begin{itemize}
+		\item To form the CPV term we chose:
+		\begin{equation*}
+			f_a = \frac{1}{32 \sqrt{3} \pi^{5/2} \kappa} \frac{1}{g_5 \sqrt{R}} = \frac{1}{64 \pi^3 \kappa g_4} \frac{1}{R}
+		\end{equation*}
+		\item Finally we obtain:
+		\begin{equation*}
+			\mathcal{L}_{4D} \supset \int d^4x \left( \frac{1}{2} (\partial_\mu a)^2 + \frac{g_f^2}{32 \pi^2} \frac{a}{f_a} F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right)
+		\end{equation*}
+		$\rightarrow$ PQ-Symmetry broken for low energy solutions\\
+		
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Axiverse from an EFT perspective}
