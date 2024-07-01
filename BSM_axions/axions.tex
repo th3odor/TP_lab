@@ -106,7 +106,16 @@
   \begin{columns}
     \column{\textwidth}
     \begin{itemize}
-      \item Table of contents
+      \item Table of contents:
+      \begin{itemize}
+        \item [1.] Introduction
+        \item [2.] Field theory axions
+        \item [3.] String theory axions
+        \item [4.] Axiverse from an EFT perspective
+        \item [5.] Summary
+      \end{itemize}
+    \end{itemize}
+    \begin{itemize}
       \item Talk based on \citecustom{paper}: "TASI Lectures on the Particle Physics and Astrophysics of Dark Matter"
     \end{itemize}
   \end{columns} 
@@ -209,6 +218,7 @@
     \column{\textwidth}
     \begin{itemize}
       \item Axion emerging as pseudo-Goldstone boson of a $U(1)_{\text{PQ}}$ symmetry, known as the Peccei-Quinn (PQ) symmetry
+      \item Axion is massless
       \item PQ symmetry is spontaneously broken below high scale $f_a$
       \item Introduce complex scalar field $\Phi$ with vacuum expectation value $v_a$:
     \end{itemize}
@@ -222,9 +232,6 @@
       \mathcal{L}_{\Phi} &= \frac{1}{2} \partial_\mu \Phi \partial^\mu \Phi^\dagger - V(\Phi) \\
       & =  {| \partial_\mu \Phi |}^2 - \lambda \left( |\Phi|^2 - \frac{v_a^2}{2} \right)^2
     \end{align*}
-    \begin{itemize}
-      \item Axion is massless
-      \end{itemize}
   \end{columns} 
 \end{frame}
 
@@ -377,7 +384,7 @@
 
 \begin{frame}
 	\frametitle{String Theory - Overview}
-	%	\begin{minipage}{0.55\textwidth}
+	\begin{minipage}{0.7\textwidth}
 		\begin{itemize}
 			\item Idea: Particles are points $\rightarrow$ Stings in higher dimension (open or closed)\\
 			$\rightarrow$ Different vibrational modes represent different particles
@@ -389,16 +396,15 @@
 			\item Compactification $\rightarrow$ curls the infinite dimensions up into a finite geometrical shape (e.g. a circle) %by e.g. integrating over the finite extra dimensions
 			
 		\end{itemize}
-		%	\end{minipage}
-	%	\hfill
-	%	\begin{minipage}{0.4\textwidth}
-		%		\begin{figure}
-			%			\centering
-			%			\includegraphics[width=4.5cm]{images/string.pdf}
-			%			\caption{\href{https://en.wikipedia.org/wiki/File:Calabi_yau_formatted.svg}{[commons.wikimedia]}}
-			%		\end{figure}
-		%	\end{minipage}
-%	\footnotetext[1]{\protect\footnotesize \fullcite{}}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.25\textwidth}
+			\begin{figure}
+					\centering
+					\includegraphics[width=2.25cm]{images/modes.png}
+          \caption{\href{https://www.youtube.com/watch?v=n7cOlBxtKSo}{[youtube.com/ScienceClic English]}}
+				\end{figure}
+		\end{minipage}
 \end{frame}
 
 \begin{frame}
@@ -469,8 +475,8 @@
 		\begin{equation*}
 			\mathcal{L}_{4D} \supset \int d^4x \left( \frac{1}{2} (\partial_\mu a)^2 + \frac{g_f^2}{32 \pi^2} \frac{a}{f_a} F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right)
 		\end{equation*}
-		$\rightarrow$ PQ-Symmetry broken for low energy solutions\\
-		
+		$\rightarrow$ PQ-Symmetry broken for low energy solutions
+    \item Higher dimension string theories give rise to a multitude of axions or axion like particles (depending on topology)
 	\end{itemize}
 \end{frame}
 
@@ -483,8 +489,15 @@
   \begin{columns}
     \column{\textwidth}
     \begin{itemize}
-      \item Equations etc
+      \item String theory compactifications tend to predict large numbers of axion like particles (ALP)
+      \item Axions have QCD induced masses and explicit masses
+      \item Explicit axion masses are set by exponential factors
+      \item Expect roughly logarithmic distribution of ALP masses over a large mass range
+      \item Potentially from well below e.g. $10^{-22}$ eV to values $10^{-10}$ eV or higher
     \end{itemize}
+    \vspace{1cm}
+    \centering
+    \rightarrow Universe full of very light axions, the "axiverse"
   \end{columns} 
 \end{frame}
 
@@ -492,17 +505,51 @@
   \begin{columns}
     \column{\textwidth}
     \begin{itemize}
-      \item Equations etc
+      \item Implement $N$ axions with the following set of dimension-five interactions with the SM:
+    \end{itemize}
+    \begin{equation*}
+      \mathcal{L} \supset \sum_{i=1}^{N} \left[ \frac{g_s^2}{32\pi^2} \frac{c_s^i a_i}{f_a} G_{\mu\nu}^a \tilde{G}^{a\mu\nu} 
+    + \frac{g_2^2}{32\pi^2} \frac{c_2^i a_i}{f_a} W_{\mu\nu}^a \tilde{W}^{a\mu\nu} 
+    + \frac{g_1^2}{32\pi^2} \frac{c_1^i a_i}{f_a} B_{\mu\nu} \tilde{B}^{\mu\nu} 
+    + \sum_f C_{aff} \frac{\partial_\mu a_i}{2f_a} \bar{f} \gamma^\mu \gamma_5 f 
+    - \frac{1}{2} (m_i^0)^2 a_i^2 \right]
+    \end{equation*}
+    \begin{itemize}
+      \item Assume that bare masses $m_i^0$ are small relative to the ones induced by QCD: $ \frac{\Lambda^2}{f_a} \ll m_i^0$
+      \item Diagonalizing the mass matrix yields almost pure mass eigenstate:
+    \end{itemize}
+    \begin{equation*}
+      a_{\text{QCD}} = \frac{\sum_{i} c_{s}^{i} a_{i}}{\sum_{i} (c_{s}^{i})^2}
+    \end{equation*}
+    \begin{itemize}
+      \item QCD axion with mass $ m_{\text{QCD}} ≈ \Lambda_{\text{QCD}}^2 / f_a $
+      \item Remaining N-1 ALPS are verly light and do not couple to QCD
+      \item Below the electroweak scale the axion and ALPs acquire couplings to electromagnetism
     \end{itemize}
   \end{columns} 
 \end{frame}
 
-\begin{frame}{Coupling to electromagnetism}
+\begin{frame}[noframenumbering]
+  \centering
+  \Huge \textbf{\textcolor{tugreen}{Summary}}
+\end{frame}
+
+\begin{frame}{Summary}
   \begin{columns}
     \column{\textwidth}
     \begin{itemize}
-      \item Equations etc
+      \item Axions can provide promising solution for the strong CP problem and dark matter
+      \item NP models try to motivate axion existence at high energy scale
+      \begin{itemize}
+				\item[(1)] Field theory axion problematic in respect to QG
+				\item[(2)] String theory naturally produces axions while encompassing QG
+				\item[(3)] The string theory axiverse can be implemented as an EFT
+      \end{itemize}
+      \item Due to low mass and small coupling with SM, no evidence for axions has been oberved yet
     \end{itemize}
+    \vspace{1cm}
+    \centering
+    \textbf{\Huge{\textcolor{tugreen}{Thank you for your attention!}}}
   \end{columns} 
 \end{frame}
 
