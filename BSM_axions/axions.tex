@@ -188,7 +188,7 @@
       \item Axion aquires a small mass:
     \end{itemize}
     \begin{equation*}
-      m_a \approx \frac{F_{\pi} m_{\pi}}{f_a} \approx 6.0 \times 10^{-6} \left( \frac{10^{12} \, \text{GeV}}{f_a} \right) \text{eV}
+      m_a \approx \frac{F_{\pi} m_{\pi}}{f_a} \frac{\sqrt{m_u m_d}}{m_u + m_d} \approx 6.0 \times 10^{-6} \left( \frac{10^{12} \, \text{GeV}}{f_a} \right) \text{eV}
     \end{equation*}
   \end{columns} 
 \end{frame}
@@ -249,7 +249,7 @@
       \item Write down the interaction terms between the $Q_i$ and $\Phi$:
     \end{itemize}
     \begin{equation*}
-      \mathcal{L}_{\text{int}} = \sum_i \bar{Q}_i i \not{D} Q_i - \sum_i \left( y_i \bar{Q}_i Q_i \Phi + \text{h.c.} \right)
+      \mathcal{L}_{\text{int}} = \sum_i \left( y_i \bar{Q}_{i \text{,L}} Q_{i \text{,R}} \Phi + \text{h.c.} \right)
     \end{equation*}
     \begin{itemize}
       \item $y_i$ are Yukawa coupling constants
@@ -265,7 +265,7 @@
     \end{itemize}
     \begin{align*}
       \Phi \rightarrow \Phi' &= e^{i \alpha} \Phi \quad U(1)_{\text{PQ}} \,\, \text{symmetry} \\
-      Q_i \rightarrow Q_i' &= e^{\frac{i \alpha \gamma_5}{2}} \Phi \quad \text{Anomalous symmetry}
+      Q_i \rightarrow Q_i' &= e^{\frac{i \alpha \gamma_5}{2}} Q_i \quad \text{Anomalous symmetry}
     \end{align*}
     \begin{itemize}
       \item At low energy scales $r(x) \ll v_a$:
@@ -277,7 +277,7 @@
       \item Substitute into $\mathcal{L}_{\text{int}}$ and define quark masses $m_i = \frac{y_i v_a}{\sqrt{2}}$:
     \end{itemize}
     \begin{equation*}
-      \mathcal{L}_{\text{int}} = \sum_i \bar{Q}_i i \not{D} Q_i - \sum_i \left( m_i \bar{Q}_i Q_i \exp \left( i\frac{a(x)}{v_a} \right) + \text{h.c.} \right)
+      \mathcal{L}_{\text{int}} =  \sum_i \left( m_i \bar{Q}_{i \text{,L}} Q_{i \text{,R}} \exp \left( i\frac{a(x)}{v_a} \right) + \text{h.c.} \right)
     \end{equation*}
   \end{columns} 
 \end{frame}
@@ -286,7 +286,7 @@
   \begin{columns}
     \column{\textwidth}
     \begin{itemize}
-      \item Apply the axial transformation to the quark fields (anomalous symmetry)
+      \item Apply the axial transformation to the quark fields ($Q_L$ and $Q_R$ transform differently)
       \item Axion is removed from the interaction langrangian
       \item Following new term is induced:
     \end{itemize}
@@ -440,9 +440,9 @@
 			B_{\mu}(-y) = -B_{\mu}(y)\hspace{1 cm}\text{and}\hspace{1cm}  B_5(-y) = B_5(y)
 		\end{equation*}	
 		\item One additional gauge field $F_M$ is introduced (Field strength tensor $F_{MN}$)
-		\item This leads to the following Lagrangian terms
+		\item This leads to the following action
 		\begin{equation*}
-			\mathcal{L}_{5D} \supset \int d^4x \int_0^{2\pi R} dy \left( \frac{1}{4 g_5^2} B_{MN} B^{MN} + \kappa \epsilon^{MNPQR} B_M \Tr(F_{NP} F_{QR}) \right)
+			S_{5D} \supset \int d^4x \int_0^{2\pi R} dy \left( \frac{1}{4 g_5^2} B_{MN} B^{MN} + \kappa \epsilon^{MNPQR} B_M \Tr(F_{NP} F_{QR}) \right)
 		\end{equation*}
 		$g_5$, $\kappa$ coupling constants, $\epsilon^{MNPQR}$ totally antisymmetric tensor
 	\end{itemize}
@@ -459,11 +459,11 @@
 			We assume for simplicity $\int_{0}^{2\pi R}B_5(x_\mu, y)dy = 2\pi RB_5(x_\mu, y)$
 			\item Plugging it into:
 			\begin{equation*}
-				\mathcal{L}_{4D} \supset \int d^4x \int_0^{2\pi R} dy \left( \frac{1}{4 g_5^2} \underbrace{B_{MN} B^{MN}}_{\rightarrow\ B_{\mu\nu}B^{\mu\nu} + 2(\partial_\mu a)^2} + \kappa \underbrace{\epsilon^{MNPQR} B_M \Tr(F_{NP} F_{QR})}_{\rightarrow aF_{\mu\nu}^a \tilde{F}^{a\mu\nu}} \right)
+				S_{4D} \supset \int d^4x \int_0^{2\pi R} dy \left( \frac{1}{4 g_5^2} \underbrace{B_{MN} B^{MN}}_{\rightarrow\ B_{\mu\nu}B^{\mu\nu} + 2(\partial_\mu a)^2} + \kappa \underbrace{\epsilon^{MNPQR} B_M \Tr(F_{NP} F_{QR})}_{\rightarrow aF_{\mu\nu}^a \tilde{F}^{a\mu\nu}} \right)
 			\end{equation*}
 			\item After integrating:
 			\begin{equation*}
-				\mathcal{L}_{4D} \supset \int d^4x \left( \frac{2\pi R}{2g_5^2} (\partial_\mu a)^2 + (2\pi R \kappa) a F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right)
+				S_{4D} \supset \int d^4x \left( \frac{2\pi R}{2g_5^2} (\partial_\mu a)^2 + (2\pi R \kappa) a F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right)
 			\end{equation*}
 		\end{itemize}
 \end{frame}
@@ -477,7 +477,7 @@
 		\end{equation*}
 		\item Finally we obtain:
 		\begin{equation*}
-			\mathcal{L}_{4D} \supset \int d^4x \left( \frac{1}{2} (\partial_\mu a)^2 + \frac{g_f^2}{32 \pi^2} \frac{a}{f_a} F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right)
+			S_{4D} \supset \int d^4x \left( \frac{1}{2} (\partial_\mu a)^2 + \frac{g_f^2}{32 \pi^2} \frac{a}{f_a} F_{\mu\nu}^a \tilde{F}^{a\mu\nu} \right)
 		\end{equation*}
 		$\rightarrow$ PQ-Symmetry broken for low energy solutions
     \item Higher dimension string theories give rise to a multitude of axions or axion like particles (depending on topology)
