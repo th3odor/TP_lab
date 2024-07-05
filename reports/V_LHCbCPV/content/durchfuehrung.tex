@@ -41,15 +41,30 @@ number of events, only physically interesting events are selected via a trigger 
 \section{Analysis strategy}
 
 The data to be analysed was collected at LHCb in 2011 with a center of mass energy of \qty{7}{\tera\electronvolt} at an integrated luminosity of $\approx \qty{500}{\pico\barn^{-1}}$.
+A preselection has already been applied, significantly reducing background events that do not origin from the $B$ meson decays.
 The data is split into 3.4 million events with upwards polarity of the dipole magnet and 5.1 million events with downwards polarity. Each event is of the type
 $B^\pm \rightarrow h^+ h^- h^\pm$. Additionally, simulations of the decay $B^\pm \rightarrow K^+ K^- K^\pm$ exist that only describe the decay into three Kaons.
 In contrast to the actual data, the simulations do not take intermediate resonances into account. The number of observables inside the dataset has already been reduced
 to a small set of essential variables. \\
-As a first step, the distribution of individual variables is checked in the simulated data. The invariant mass of the $B$ meson is calculated and histogrammed.
+As a first step, the distribution of individual variables is checked in the simulated data. The invariant mass of the $B$ meson is calculated and histogrammed using the formula
+\begin{equation}
+	m_{\text{inv}} = P_\mu P^\mu \, ,
+	\label{eq:inv_mass}
+\end{equation}
+with $P_\mu$ beeing the total four momentum of the decay products.
 In order to proceed in the same way with the actual data, the background that is present has to be reduced. A preselection is already applied, but additional requirements on PID have to be made.
 Signal candidates for the decay $B^\pm \rightarrow K^+ K^- K^\pm$ are selected, while the selection efficiency can be checked using the availabe simulation.
 After the selection, the invariant mass of the $B$ meson can again be calculated and compared with the previous result from the simulation.
-After a succesfull selection, the counts of signal candidates for the $B^+$ and $B^-$ decays are known and can be used to determine the CP asymmetry together with its uncertainty. \\
+After a succesfull selection, the counts of signal candidates for the $B^+$ and $B^-$ decays are known and can be used to determine the CP asymmetry. Its uncertainty is given by:
+\begin{equation}
+	\sigma_A = \sqrt{\frac{1-A^2}{N^+ + N^-}} \, ,
+	\label{eq:A_error}
+\end{equation}
+while the significance of the asymmetry can be calculated using
+\begin{equation}
+	s(A) = \frac{A}{\sigma_A} \, .
+	\label{eq:A_sigma}
+\end{equation}
 A popular technique to visualize resonances in three-body decays are Dalitz plots. Here, two of the squared invariant masses from the combination of each two final state particles
 are usually plotted against each other. Any intermediate resonance will then be visible as a band in the plot, where the position and size of the band allow to infer on
 the mass and width of the resonance. In the case of this analysis, the Dalitz plots are used to locate and remove charm resonances due to the low CP violation in this region.\\
