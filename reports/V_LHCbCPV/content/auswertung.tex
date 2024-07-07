@@ -16,7 +16,7 @@ The distributions of the momenta belonging to the first Kaon are shown in \autor
 
 From the momenta and the nominal mass of the Kaon $m(K^\pm) = \qty{493.677 \pm 0.015}{\mega\eV }$ 
 the energy carried by the Kaon is determined \cite{pdg}. 
-The Energy distribution is shown in \autoref{fig:energyk1}
+The energy distribution is shown in \autoref{fig:energyk1}
 
 \begin{figure}
 	\centering
@@ -26,20 +26,20 @@ The Energy distribution is shown in \autoref{fig:energyk1}
 \end{figure}
 
 
-Using the determined energy and momenta of the Kaons the four 
+Using the determined energy and momenta of the Kaons, the four 
 momenta of the $B^\pm$ can be calculated. The four momenta are then 
-used to determine the invariant mass of the $B^\pm$. 
+used to determine the invariant mass of the $B^\pm$ according to \eqref{eq:inv_mass}. 
 This distribution is not shown as the peak around the nominal mass 
 $m(B^\pm) = \qty{5279.41\pm0.07}{\mega\eV}$ is 
 too narrow for histogramming \cite{pdg}. \\
 
 
-Before working with the data sample an additional requirement is placed 
+Before working with the data sample, an additional requirement is placed 
 on the \texttt{prob} variables to ensure the studied candidates originate 
 from the $B^\pm \rightarrow K^+ K^- K^\pm$ decay. This requirement is applied, 
 because the data sample contains candidates from additional decays, e.g. 
 including Pions. The values for the requirement on the candidate's determined 
-probability are chosen to be: 
+probability are chosen as: 
 \begin{align}
 	\mathtt{H1\_probK} &> 0.5\\
 	\mathtt{H1\_probPi} &< 0.5
@@ -57,10 +57,10 @@ data sample to obtain the $B$-Mesons invariant mass distribution, shown in \auto
 To calculate the global $CP$-asymmetry $A_\mathrm{CP}$ the signal counts of the 
 $B^+$ and $B^-$ have to be determined. This is achieved by fitting the function 
 \begin{equation}
-	f(x) = N\exp\left(-\lambda x\right) + A  \exp\left(\frac{(x-\mu)^2}{2\sigma^2}\right)
+	f(x) = B\exp\left(-\lambda x\right) + A  \exp\left(\frac{(x-\mu)^2}{2\sigma^2}\right)
 	\label{eq:fit}
 \end{equation} 
-onto the counts determined from a histogram and calculating the signal counts as 
+on the counts determined from a histogram and calculating the signal counts as 
 the area under the Gaussian function $N=\sqrt{2\pi}A\sigma$. The plots of the 
 fitted data for both $B^+$ and $B^-$ candidates are given \autoref{fig:fits}
 
@@ -80,15 +80,15 @@ fitted data for both $B^+$ and $B^-$ candidates are given \autoref{fig:fits}
 \end{figure}
 
 The determined signal counts are used to calculate the global asymmetry factor 
-$A_\mathrm{glo}$ using \eqref{eq:asymmetry} and \eqref{eq:A_error}.  
-The global asymmetry factor calculates to 
+$A_\mathrm{glo}$ using \eqref{eq:asymmetry}.  
+The global asymmetry factor equates to 
 \begin{equation}
 	A_\mathrm{glo} = \num{0.04469\pm0.00815}
 \end{equation}
-with a significance of $S = 5.48$. \\
+with a significance of $S = 5.48$, where \eqref{eq:A_error} and \eqref{eq:A_sigma}
+are used to calculate the error and significance of the asymmetry, respectively. \\
 
-When studying three body decays Dalitz plots are a helpful tool to remove different 
-resonances from the data samples. For the Dalitz plot, each possible invariant mass 
+Next, Dalitz plots are created to remove different resonances from the data samples. For the Dalitz plot, each possible invariant mass 
 of the combination of two of the three Kaons is created. The two possible resonances, 
 where the sum of the charges is zero are then used to create the Dalitz plot. 
 The Dalitz plots of the simulation sample and the data sample in \autoref{fig:dalitz}.
@@ -120,8 +120,8 @@ and plot the lower mass on one and the higher mass on the other axis, as seen in
 %	\label{fig:dalitzalt}
 %\end{figure}
 
-To enhance the plot is created again not as a two-dimensional histogram, 
-but as a scatter plot, shown in \autoref{fig:dalitzdata}.
+Recreating the same plot again as a scatter plot instead of a two-dimensional histogram 
+improves the visibility of the resonances, as shown in \autoref{fig:dalitzdata}.
 
 %\begin{figure}
 %	\centering
