@@ -1,4 +1,4 @@
-all: build/vXXX.pdf
+all: build/V_LHCbMVA.pdf
 
 # hier Python-Skripte:
 build/plot.pdf: plot.py ../matplotlibrc ../header-matplotlib.tex | build
@@ -7,10 +7,10 @@ build/plot.pdf: plot.py ../matplotlibrc ../header-matplotlib.tex | build
 	# and set the matplotlibrc
 	TEXINPUTS=$$(pwd)/..: MATPLOTLIBRC=../matplotlibrc python plot.py
 
-# hier weitere Abhängigkeiten für build/vXXX.pdf deklarieren:
-build/vXXX.pdf: build/plot.pdf
+# hier weitere Abhängigkeiten für build/V_LHCbMVA.pdf deklarieren:
+build/V_LHCbMVA.pdf: build/plot.pdf
 
-build/vXXX.pdf: FORCE | build
+build/V_LHCbMVA.pdf: FORCE | build
 	# to find header and bib files in the main directory
 	TEXINPUTS=..: \
 	BIBINPUTS=..: \
@@ -20,7 +20,7 @@ build/vXXX.pdf: FORCE | build
 	  --output-directory=build \
 	  --interaction=nonstopmode \
 	  --halt-on-error \
-	vXXX.tex
+	V_LHCbMVA.tex
 
 build:
 	mkdir -p build
