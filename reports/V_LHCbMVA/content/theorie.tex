@@ -6,7 +6,9 @@ The goal of this analysis is the classification of $B_s$ candidates in a data sa
 \section{Theory}
 \label{sec:Theory}
 
-Before analyzing the data sample a look at the studied decay \signal it is important to understand it's kinematic. The $B_s$ usually decays weakly as seen in \autoref{fig:feynman}. 
+\subsection{\texorpdfstring{$B_s \to \psi(2S)K_S$}{B_s -> Psi(2S)K_S} Decay}
+
+Before analyzing the data sample a look at the studied decay \signal it is important to understand it's kinematic. The $B_s$ usually decays weakly as seen in \autoref{fig:feynman}. At tree level the $W$ boson creates the $K_S$ (K-Short) and the $\psi(2S)$. The $\psi(2S)$ may decays into $\mu^+\mu^-$. This decay channel leaves a signature inside the LHCb detector which is very well reconstructable. Additionally the $K_S$'s most probable decay channel is into $\pi^+\pi^-$. Next to the $K_S$ the $B_s$ may also decay into the $K_L$, but the ratio of $K_L$ to $K_S$ is negligible. Another interesting part of the decay are the lifetime of the particles. The $K_S$ decays weakly leading it to have a relatively long lifetime, compared to the fast decaying $\psi(2S)$ which mostly decays strongly. At the LHCb experiment the vertices are reconstructed from the final states down to the \textit{primary vertex} (pp collision). So the data samples consists of candidates where the two pions are reconstructed to the \textit{tertiary vertex} ($K_S$ decay). The $K_S$ and the two muons are then reconstructed to the \textit{secondary vertex} ($B_s$ Decay).
 
 \begin{figure}[htpb]
 	\centering
@@ -32,8 +34,8 @@ Before analyzing the data sample a look at the studied decay \signal it is impor
 			
 			
 			\diagram* {
-				(a1) -- [fermion, ] (rm2),
-				(rm2) -- [fermion, ] (a2),
+				(rm2) -- [fermion, ] (a1),
+				(a2) -- [fermion, ] (rm2),
 				(rm2)-- [photon, bend right,edge label'={\(W^+\)}] (rm3),
 				(rm3) -- [fermion] (r2),
 				(r3) -- [fermion] (rm3),
@@ -41,12 +43,48 @@ Before analyzing the data sample a look at the studied decay \signal it is impor
 			};
 			\draw [decoration={brace}, decorate, thick] (l2.south west) -- (a1.north west) node [pos=0.5, left] {$B_s\ $};
 			\draw [decoration={brace}, decorate, thick] (a2.north east) -- (r2.south east) node [pos=0.525, right] {$\ \Psi(2S)$};
-			\draw [decoration={brace}, decorate, thick] (r3.north east) -- (r4.south east) node [pos=0.5, right] {$\ K_s$};            
+			\draw [decoration={brace}, decorate, thick] (r3.north east) -- (r4.south east) node [pos=0.5, right] {$\ K_S$};            
 		\end{feynman}
 	\end{tikzpicture}
 	\label{fig:feynman}
 	\caption{Feynmangraph of the decay \signal.}
 \end{figure}
+
+Through different effects inside the detector the data sample also consist of candidates that do not originate from the decay of the $B_s$ or a different decay channel altogether. These \textit{background} candidates may consist of unrelated particles mimicking the signal decay (combinatorial background) or the so-called partially reconstructed background. This secondary type of background is not considered in the analysis. \\
+\subsection{Boosted Decision Tree}
+To distinguish between background and signal candidates a multivariate classifier is applied. The classifier employed in the analysis is a Boosted Decision Tree (BDT). A Decision Tree is a classifier used to obtain a probability for each candidate of being signal or background. Boosting is the process of training multiple Decision Trees each on sub sample of the training data. Each decision of the tree is then weighted depending on the performance of the tree on the last decision. A final decision is obtained by taking the weighted average of each tree. The process of splitting the data sample into $k$ sub samples and then using $k-1$ for the BDT and one as a validation sample is called $k$-folding.\\
+
+A Figure of Merit (FOM) is used during classification to obtain the optimal cut on the determined probability. A FOM is constructed depending on the classification problem at hand. In the employed analysis the FOM used is 
+\begin{equation}
+	\mathrm{FOM} = \frac{\epsilon_\mathrm{sig}}{\frac{5}{2}-\sqrt{N_\mathrm{bck}}}.
+	\label{eq:fom}
+\end{equation}
+The idea in this case is to retain most of the signal candidates while reducing most of the background candidates. \\
+\\
+
+To claim a discovery a significance $S$ of 5 is required. $S$ is determined by dividing the observable (in this case the signal counts $N_\mathrm{sig}$) by its uncertainty. As the measurement is a poisson process its uncertainty can be approximated by $\sigma = \sqrt{N_\mathrm{sig} + N_\mathrm{bkg}}$, where $N_\mathrm{bkg}$ is the number of remaining background candidates. From this the assumed significance $m$ calculates to
+\begin{equation}
+	m = \frac{N_\mathrm{sig}}{\sqrt{N_\mathrm{sig} + N_\mathrm{bkg}}}.
+\end{equation}
+
+ 
+%\subsection{The sPlot method}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
