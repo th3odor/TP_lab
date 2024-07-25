@@ -1,14 +1,14 @@
 all: build/V_LHCbMVA.pdf
 
 # hier Python-Skripte:
-build/plot.pdf: plot.py ../matplotlibrc ../header-matplotlib.tex | build
-	# so that matplotlib can find the tex header when running
-	# LaTeX in the tmp directory
-	# and set the matplotlibrc
-	TEXINPUTS=$$(pwd)/..: MATPLOTLIBRC=../matplotlibrc python plot.py
+#build/plot.pdf: plot.py ../matplotlibrc ../header-matplotlib.tex | build
+#	# so that matplotlib can find the tex header when running
+#	# LaTeX in the tmp directory
+#	# and set the matplotlibrc
+#	TEXINPUTS=$$(pwd)/..: MATPLOTLIBRC=../matplotlibrc python plot.py
 
 # hier weitere Abhängigkeiten für build/V_LHCbMVA.pdf deklarieren:
-build/V_LHCbMVA.pdf: build/plot.pdf
+#build/V_LHCbMVA.pdf: build/plot.pdf
 
 build/V_LHCbMVA.pdf: FORCE | build
 	# to find header and bib files in the main directory

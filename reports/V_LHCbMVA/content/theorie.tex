@@ -46,8 +46,8 @@ Before analyzing the data sample a look at the studied decay \signal it is impor
 			\draw [decoration={brace}, decorate, thick] (r3.north east) -- (r4.south east) node [pos=0.5, right] {$\ K_S$};            
 		\end{feynman}
 	\end{tikzpicture}
-	\label{fig:feynman}
 	\caption{Feynmangraph of the decay \signal.}
+	\label{fig:feynman}
 \end{figure}
 
 Through different effects inside the detector the data sample also consist of candidates that do not originate from the decay of the $B_s$ or a different decay channel altogether. These \textit{background} candidates may consist of unrelated particles mimicking the signal decay (combinatorial background) or the so-called partially reconstructed background. This secondary type of background is not considered in the analysis. \\
@@ -65,6 +65,7 @@ The idea in this case is to retain most of the signal candidates while reducing 
 To claim a discovery a significance $S$ of 5 is required. $S$ is determined by dividing the observable (in this case the signal counts $N_\mathrm{sig}$) by its uncertainty. As the measurement is a poisson process its uncertainty can be approximated by $\sigma = \sqrt{N_\mathrm{sig} + N_\mathrm{bkg}}$, where $N_\mathrm{bkg}$ is the number of remaining background candidates. From this the assumed significance $m$ calculates to
 \begin{equation}
 	m = \frac{N_\mathrm{sig}}{\sqrt{N_\mathrm{sig} + N_\mathrm{bkg}}}.
+	\label{eq:sig}
 \end{equation}
 
  

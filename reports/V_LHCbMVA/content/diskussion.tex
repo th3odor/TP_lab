@@ -1,2 +1,12 @@
-\section{Diskussion}
-\label{sec:Diskussion}
+\section{Discussion}
+\label{sec:Discussion}
+
+Some remarks on the analysis should be made to put the final result into more context.
+While the distributions of the chosen variables show good seperation, there is still room for optimization. The number of variables was arbitrarily chosen as 16,
+but can easily be varied when changing the requirements on the Kolmogorov Smirnov test statistics or correlations. Testing the BDT performance with different number of
+parameters could help to improve its predictive power. The five individual BDTs performed very similar, indicating that there is not too much overtraining.
+However, the BDTs have all been initialized with default parameters. Tuning these parameters in a grid search could definetely help improve the BDT performance and thus
+the final result.
+The fits on the signal peaks have been modeled by two gaussian functions, however they cannot describe the assymetric shape of these peaks perfectly.
+A more complicated model like a double-sided crystall ball function can improve the fit and thus directly the yield of the signal.
+The significance was only estimated using \eqref{eq:sig} and seems rather high beeing greater than $5 \, \sigma$. Including uncertainties should help to mitigate this fact.
