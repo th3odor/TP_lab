@@ -42,7 +42,8 @@ number of events, only physically interesting events are selected via a trigger 
 For this analysis three types of samples are provided. Two simulation samples of the \signal \ decay used as a signal proxy as well as the so-called control channel, a kinematically similar decay channel $B \to \psi(2S)K_S$ and the actual data sample. This data sample contains candidates from both the signal and control channel as well as the background candidates. For the later training of the classifier the so-called upper sideband (candidates with a invariant mass higher outside the signal region) of the data sample is used as a proxy for background.\\
 
 As the distributions in the control and signal channel differ from those in the actual data sample it is necessary to align these. This so called \textit{kinematic reweighting} has already been performed. As these generated weights align only some of the distributions in the samples it is important to find those deviating to much. These features are determined using \textit{largest distance between the cumulative probability distributions} $F^i$
-\begin{equation*}
+\begin{equation}
 	\underset{n}{\mathrm{sup}}\left|F^1_n - F^2_n\right|,
-\end{equation*}
+	\label{eq:ks_test}
+\end{equation}
 where $F^i$ is determined form histogramming the different features.
